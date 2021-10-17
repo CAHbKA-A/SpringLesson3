@@ -12,7 +12,7 @@ public class ProductRepositoryImp implements ProductRepository {
     @Override
     public Product get(Long id) {
 
-
+        /*тут будет запрос к бд. пока генерим список налету*/
         return Product.builder()
                 .id(id)
                 .title("Pr" + id)
@@ -32,5 +32,12 @@ public class ProductRepositoryImp implements ProductRepository {
 
 
         return list;
+    }
+
+    @Override
+    public void addNew(Product product) {
+        /*тут будет запрос к бд*/
+
+        getAll().add(product);
     }
 }
