@@ -31,7 +31,7 @@ public class AddProductController {
 
         System.out.println(addProduct);
         productService.addProduct(addProduct);
-        System.out.println(productService.getProducts());// изза зашглушки показывает старое
+        System.out.println(productService.getProducts());// изза зашглушки показывает старое. вообще при работе с бд, должен добавить
         model.addAttribute("addProduct");
         return "product/productList";
     }

@@ -36,7 +36,7 @@ public class ProductRepositoryImp implements ProductRepository {
 
     @Override
     public void addNew(Product product) {
-        /*тут будет запрос к бд*/
+        /*тут будет add запрос к бд*/
 
         getAll().add(product);
     }
