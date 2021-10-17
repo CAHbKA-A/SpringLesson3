@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
 
     private final ProductService productService;
+
     @GetMapping
     public String getProducts(Model model) {
-       model.addAttribute("products", productService.getProducts());
+        model.addAttribute("products", productService.getProducts());
 
         return "product/productList";
     }
-
 
 
 }

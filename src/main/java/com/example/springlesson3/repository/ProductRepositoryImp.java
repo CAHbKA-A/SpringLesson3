@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 public class ProductRepositoryImp implements ProductRepository {
     @Override
@@ -14,15 +15,14 @@ public class ProductRepositoryImp implements ProductRepository {
 
         return Product.builder()
                 .id(id)
-                .title("Pr"+id)
+                .title("Pr" + id)
                 .description("blahblah")
-                .cost((int) (123*id))
+                .cost((int) (123 * id))
                 .build();
     }
 
     @Override
-    public List<Product> getAll()
-    {
+    public List<Product> getAll() {
         /*тут будет запрос к бд*/
         ArrayList<Product> list = new ArrayList<Product>();
         for (int i = 0; i < 10; i++) {
