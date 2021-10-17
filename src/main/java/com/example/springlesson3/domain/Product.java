@@ -6,13 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /*класс хранит только состояние и ни какой бизнеслогики*/
-@Data // генератор всего для (гетеры сеттеры, хэш, эквал
+@Data // генератор всего для (гетеры сеттеры, хэш, эквал, тустринг
 @Builder //???создавалк обьекта через билдер  Product.builder.id(3L).description ("dfdfd" ).build()
-@AllArgsConstructor  //генератор конструтора
-@NoArgsConstructor//генератор конструтора
+@AllArgsConstructor  //генератор конструтора (все аргументы)
+@NoArgsConstructor//генератор конструтора (дефолтный)
 public class Product {
     private Long id;
     private String title;
-    private String description;
     private int cost;
+    private String description;
+
+
+
 }

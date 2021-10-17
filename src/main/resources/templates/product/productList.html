@@ -1,0 +1,25 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>1</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<table>
+
+  <tr th:each="product :${products}">
+    <td th:text="${product.id}"></td>
+    <td th:text="${product.title}"></td>
+    <td th:text="${product.cost}"></td>
+
+  </tr>
+</table>
+
+<a href="/addProduct">Add one more</a>
+</body>
+
+</html>
