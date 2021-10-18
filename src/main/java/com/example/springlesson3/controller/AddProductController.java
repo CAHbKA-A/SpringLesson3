@@ -33,7 +33,7 @@ public class AddProductController {
         productService.addProduct(addProduct);
         System.out.println(productService.getProducts());// изза зашглушки показывает старое. вообще при работе с бд, должен добавить
         model.addAttribute("addProduct");
-        return "product/productList";
+        return "productList2";
     }
 
 }
