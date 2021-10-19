@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 
@@ -19,6 +22,8 @@ public class AddProductController {
     }
 
 
+
+
     @GetMapping("/addProduct") //получаем форму
     public String addForm(Model model) {
         model.addAttribute("addProduct", new Product());
@@ -26,14 +31,10 @@ public class AddProductController {
     }
 
     @PostMapping("/addProduct")
-    public String addSubmit(@ModelAttribute Product addProduct, Model model) {
+    public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile img) {
+        productService.addProductWithImg(addProduct, img);
 
-
-        System.out.println(addProduct);
-        productService.addProduct(addProduct);
-        System.out.println(productService.getProducts());// изза зашглушки показывает старое. вообще при работе с бд, должен добавить
-        model.addAttribute("addProduct");
-        return "productList2";
+        return new RedirectView("/product");// перенаправляем на гет
     }
 
 }
