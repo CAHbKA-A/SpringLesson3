@@ -11,12 +11,12 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/product")
+@RequestMapping
 public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping
+    @GetMapping("/product")
     public String getProducts(Model model) {
         model.addAttribute("products", productService.getProducts());
 
@@ -24,18 +24,21 @@ public class ProductController {
     }
 
 //вот так не получается. все в одном классе.
-//    @GetMapping("/addProduct") //получаем форму
-//    public String addForm(Model model) {
-//        model.addAttribute("addProduct", new Product());
-//        return "product/addProduct";
-//    }
-//
-//    @PostMapping("/addProduct")
-//    public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile img) {
-//        productService.addProductWithImg(addProduct, img);
-//
-//        return new RedirectView("/product");// перенаправляем на гет
-//    }
-//
+    @GetMapping("/addProduct") //получаем форму
+    public String addForm(Model model) {
+        model.addAttribute("addProduct", new Product());
+        return "product/addProduct";
+    }
+
+    @PostMapping("/addProduct")
+    public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile img) {
+     //   System.out.println(addProduct);
+     //   System.out.println(img);
+
+        productService.addProductWithImg(addProduct, img);
+
+        return new RedirectView("/product");// перенаправляем на гет
+    }
+
 
 }

@@ -5,7 +5,7 @@ import com.example.springlesson3.domain.Product;
 import java.util.List;
 
 public interface ProductRepository {
-    Product get(Long id);
+    Product get(int id);
 
     List<Product> getAll();
 

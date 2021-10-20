@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class CategoryRepositoryImp implements CategoryRepository {
     @Override
-    public Category get(Long id) {
+    public Category get(int id) {
 
         /*тут будет запрос к бд. пока генерим список налету*/
         return Category.builder()
@@ -26,7 +26,7 @@ public class CategoryRepositoryImp implements CategoryRepository {
         /*тут будет запрос к бд*/
         ArrayList<Category> list = new ArrayList<Category>();
         for (int i = 0; i < 10; i++) {
-            list.add(get((long) i));
+            list.add(get( i));
 
         }
 

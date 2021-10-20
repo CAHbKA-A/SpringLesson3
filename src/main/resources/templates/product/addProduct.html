@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>you can add product</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,30 +11,26 @@
 <body>
 <div class="container">
 
-        <!--подставляем шапку -->
-        <div th:replace="~{Parts/header::header}"></div>
+    <!--подставляем шапку -->
+    <div th:replace="~{Parts/header::header}"></div>
 
-        <h1>Lets add</h1>
-        <form action="#" th:action="@{/addProduct}" th:object="${addProduct}" method="post">
-            <p>Id: <input type="text" th:field="*{id}"/></p>
-            <p>Title: <input type="text" th:field="*{title}"/></p>
-            <p>cost: <input type="text" th:field="*{cost}"/></p>
-            <p>description: <input type="text" th:field="*{description}"/></p>
-            <p>category: <input type="text" th:field="*{categoryId}"/></p>
+    <h1>Lets add</h1>
+    <form action="#" th:action="@{/addProduct}" th:object="${addProduct}" method="post" enctype="multipart/form-data">
 
+        <p>Id: <input type="text" placeholder="22" th:field="*{id}"/>например 12</p>
+        <p>Title: <input type="text" th:field="*{title}"/></p>
+        <p>cost: <input type="text" placeholder="88" th:field="*{cost}"/>например 123 (пока инт)</p>
+        <p>description: <input type="text" th:field="*{description}"/></p>
+        <!--        будет выпадающе меню    <p>category: <input type="text" th:field="*{categoryId}"/></p>-->
 
+        File to upload: <input type="file" name="img" id="img">
 
-            <p><input type="submit" value="Add"/> <input type="reset" value="Reset"/></p>
-
-        </form>
-
-    <form method="POST" enctype="multipart/form-data"
-          action="/upload">
-        File to upload: <input type="file" name="file"><br /> File name: <input
-            type="text" name="name"><br /> <br /> <input type="submit"
-                                                         value="Upload"> upload!
+        </br>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
-    </div>
+
+
+</div>
 
 </body>
 </html>

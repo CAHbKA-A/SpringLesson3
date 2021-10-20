@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CategoryRepository {
 
-    Category get (Long id);
+    Category get (int id);
 
     List<Category> getAll();
 

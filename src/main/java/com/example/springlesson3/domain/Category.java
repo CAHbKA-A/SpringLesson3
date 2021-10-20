@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
-    private Long id;
+    private int id;
     private String nameCategory;
     private String pathUrl;
 }

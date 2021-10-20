@@ -15,7 +15,7 @@ public class ProductRepositoryImp implements ProductRepository {
  private  final CategoryRepository categoryRepository;
 
     @Override
-    public Product get(Long id) {
+    public Product get(int id) {
 
         /*тут будет запрос к бд. пока генерим список налету*/
         return Product.builder()
@@ -32,7 +32,7 @@ public class ProductRepositoryImp implements ProductRepository {
         /*тут будет запрос к бд*/
         ArrayList<Product> list = new ArrayList<Product>();
         for (int i = 0; i < 10; i++) {
-            list.add(get((long) i));
+            list.add(get( i));
 
         }
 

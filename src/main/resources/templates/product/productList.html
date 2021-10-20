@@ -25,31 +25,29 @@
         <!--стиль карт, отступы -->
         <div class="row rows-cols-auto mt-5 mb-5">
 
-                 <div th:each="product :${products}" class="card  me-2 mb-2" style="width: 18rem;">
-                    <img src="https://cdn.lifehacker.ru/wp-content/uploads/2014/05/frame_1581322506-288x144.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h2 th:text="${product.title}" class="card-title">Card</h2>
-                        <h5 th:text="${'Цена '+product.cost+' $'}" class="card-title"> $</h5>
+            <div th:each="product :${products}" class="card  me-2 mb-2" style="width: 18rem;">
+                <img src="https://cdn.lifehacker.ru/wp-content/uploads/2014/05/frame_1581322506-288x144.jpg"
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h2 th:text="${product.title}" class="card-title">Card</h2>
+                    <h5 th:text="${'Цена '+product.cost+' $'}" class="card-title"> $</h5>
 
-                        <p th:text="${product.description}" class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Подробнее</a>
-                        <a href="#" class="btn btn-primary">В корзину</a>
+                    <p th:text="${product.description}" class="card-text"></p>
+                    <a href="#" class="btn btn-primary">Подробнее</a>
+                    <a href="#" class="btn btn-primary">В корзину</a>
 
 
-                    </div>
                 </div>
-
-
-
-
             </div>
 
+
         </div>
+
     </div>
+</div>
 
 
-
-    <a href="/addProduct">Add one more</a>
+<a href="/addProduct">Add one more</a>
 </div>
 
 </body>

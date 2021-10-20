@@ -30,13 +30,19 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public void addProductWithImg(Product addProduct, MultipartFile img) {
-        //Обращение к бд - добавляем продукт
-        //....
+
         //сохроняем картинку
-        if (img != null && img.isEmpty()) {
-            Path path = FileUtil.saveImgOfProduct(img);
+//todo проверить размер или делать утилиту ужималки
+
+
+        if (img != null && !img.isEmpty()) {
+            //   System.out.println(img);
+            Path path = FileUtil.uploadProductImg(img);
             addProduct.setImgLink(path.toString());
+
         }
-        //Обращение к бд - обновляем продукт(дописываем в бд ссылку накартинку)
+        System.out.println("как будто записал в БД " + addProduct);
+        //Обращение к бд - добавляем продукт c  сылкой на картинку
+
     }
 }

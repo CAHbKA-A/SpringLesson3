@@ -12,6 +12,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {//регистор ресурсов обрабатывает запросы ш
         String imgFolder = "img";
+
         String staticPath = Paths.get(System.getProperty("user.dir"), imgFolder).toFile().getAbsolutePath();
 
         // фильтруем урл . если ...8080/img/**, то идем в папку по асб пути staticPath
