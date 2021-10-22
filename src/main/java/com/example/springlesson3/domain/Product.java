@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor  //генератор конструтора (все аргументы)
 @NoArgsConstructor//генератор конструтора (дефолтный)
 public class Product {
-    private Long id;
+    private int id;
     private String title;
     private int cost;
     private String description;
+    private Category categoryId;
+    private String imgLink;
 
 
 

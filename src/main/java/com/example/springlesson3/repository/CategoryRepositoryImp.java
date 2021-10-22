@@ -1,36 +1,30 @@
 package com.example.springlesson3.repository;
 
+import com.example.springlesson3.domain.Category;
 import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.CategoryRepository;
-import com.example.springlesson3.interfaces.ProductRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
-public class ProductRepositoryImp implements ProductRepository {
- private  final CategoryRepository categoryRepository;
-
+public class CategoryRepositoryImp implements CategoryRepository {
     @Override
-    public Product get(int id) {
+    public Category get(int id) {
 
         /*тут будет запрос к бд. пока генерим список налету*/
-        return Product.builder()
+        return Category.builder()
                 .id(id)
-                .title("Pr" + id)
-                .description("blahblah")
-                .cost((int) (123 * id))
-                .categoryId(categoryRepository.get(id))
+                .nameCategory("Category N" + id)
+                .pathUrl("/Category_" + id)
                 .build();
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<Category> getAll() {
         /*тут будет запрос к бд*/
-        ArrayList<Product> list = new ArrayList<Product>();
+        ArrayList<Category> list = new ArrayList<Category>();
         for (int i = 0; i < 10; i++) {
             list.add(get( i));
 
@@ -41,9 +35,9 @@ public class ProductRepositoryImp implements ProductRepository {
     }
 
     @Override
-    public void addNew(Product product) {
+    public void addNew(Category category) {
         /*тут будет add запрос к бд*/
 
-        getAll().add(product);
+        getAll().add(category);
     }
 }
