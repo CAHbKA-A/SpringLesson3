@@ -26,7 +26,7 @@
         <div class="row rows-cols-auto mt-5 mb-5">
 
             <div th:each="product :${products}" class="card  me-2 mb-2" style="width: 18rem;">
-                <img src="https://cdn.lifehacker.ru/wp-content/uploads/2014/05/frame_1581322506-288x144.jpg"
+                <img th:src="${product.imgLink}"
                      class="card-img-top" alt="...">
                 <div class="card-body">
                     <h2 th:text="${product.title}" class="card-title">Card</h2>
