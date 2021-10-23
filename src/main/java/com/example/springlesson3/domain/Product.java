@@ -1,23 +1,44 @@
 package com.example.springlesson3.domain;
 
+import com.example.springlesson3.domain.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 /*класс хранит только состояние и ни какой бизнеслогики*/
-@Data // генератор всего для (гетеры сеттеры, хэш, эквал, тустринг
-@Builder //???создавалк обьекта через билдер  Product.builder.id(3L).description ("dfdfd" ).build()
-@AllArgsConstructor  //генератор конструтора (все аргументы)
-@NoArgsConstructor//генератор конструтора (дефолтный)
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
+@Table (name = "products")
 public class Product {
+    @Id
+    @GeneratedValue
+    @Column (name = "id")
     private int id;
+
+    @Column
     private String title;
+
+    @Column
     private int cost;
+
+    @Column
     private String description;
-    private Category categoryId;
+
+  //  private Category categoryId;
+
+    @Column
     private String imgLink;
 
 
 
 }
+
+
+

@@ -23,7 +23,7 @@ public class ProductRepositoryImp implements ProductRepository {
                 .title("Pr" + id)
                 .description("blahblah")
                 .cost((int) (123 * id))
-                .categoryId(categoryRepository.get(id))
+                //.categoryId(categoryRepository.get(id))
                 .build();
     }
 
