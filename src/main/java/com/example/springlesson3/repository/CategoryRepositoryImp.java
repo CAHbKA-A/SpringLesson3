@@ -1,7 +1,6 @@
 package com.example.springlesson3.repository;
 
 import com.example.springlesson3.domain.Category;
-import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.CategoryRepository;
 import org.springframework.stereotype.Repository;
 
