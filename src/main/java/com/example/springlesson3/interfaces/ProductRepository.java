@@ -12,4 +12,5 @@ public interface ProductRepository {
     void addNew(Product product);
 
 
+    void deleteProduct(int id);
 }

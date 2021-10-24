@@ -43,5 +43,13 @@ public class ProductController {
         return "product/editProduct";
     }
 
+    @GetMapping("/deleteProduct/{id}") //получаем форму
+    public String deleteProductQuery(Model model, @PathVariable("id") int id) {
+        productService.deleteProduct(id);
+
+        return("/product/ok");
+       // return("/product");
+    }
+
 
 }
