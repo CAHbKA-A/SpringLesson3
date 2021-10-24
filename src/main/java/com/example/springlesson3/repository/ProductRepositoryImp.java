@@ -26,7 +26,12 @@ public class ProductRepositoryImp implements ProductRepository {
 
     @Override
     public void addNew(Product product) {
-        /*тут будет add запрос к бд*/
-        getAll().add(product);
+        ProductDao.addProduct(product);
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        ProductDao.deleteById(id);
+
     }
 }

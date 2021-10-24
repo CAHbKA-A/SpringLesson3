@@ -41,8 +41,20 @@ public class ProductServiceImp implements ProductService {
             addProduct.setImgLink(path.toString());
 
         }
-        System.out.println("как будто записал в БД " + addProduct);
-        //Обращение к бд - добавляем продукт c  сылкой на картинку
 
+        productRepository.addNew(addProduct);
+
+
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        return productRepository.get(id);
+
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        productRepository.deleteProduct(id);
     }
 }
