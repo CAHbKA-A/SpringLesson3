@@ -82,17 +82,8 @@ public class ProductRepositoryImp implements ProductRepository {
         }
 
 
-        return null;
+        return product;
     }
 
-    //       em.persist(product);
-//       em.getTransaction().commit();
-//  Product productFromDB = ProductDao.findById(id);
-//        em.getTransaction().begin();
-//        Product productFromDB  = em.find(Product.class, id);
-//        em.getTransaction().commit();
-//        em.getTransaction().begin();
-//        em.merge(productFromDB);
-//        em.merge(product);
 
 }
