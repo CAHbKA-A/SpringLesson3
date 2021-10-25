@@ -19,18 +19,18 @@ public class Install_DB_Shop {
     public static void main(String[] args) {
         try {
             init();
-           crateNewProductsInDB();
+            crateNewProductsInDB();
 
         } finally {
             shutdown();
         }
-        // System.out.println(ProductDao.findById(1));
+        System.out.println(ProductDao.findById(1));
         //  System.out.println(ProductDao.findAll());
         //  ProductDao.deleteById(3);
-     //   Product p1 = new Product("sadweq",22231,"3342132","44g45t");
-        ProductDao.addProduct(new Product("sadweq",22231,"3342132","44g45t"));
-        Product p2 = new Product("sa123123dweq",22231,"3342132","44g45t");
-      //  SaveOrUpdate
+        //   Product p1 = new Product("sadweq",22231,"3342132","44g45t");
+        //  ProductDao.addProduct(new Product("sadweq", 22231, "3342132", "44g45t"));
+        //  Product p2 = new Product("sa123123dweq", 22231, "3342132", "44g45t");
+        //  SaveOrUpdate
     }
 
     private static void crateNewProductsInDB() {

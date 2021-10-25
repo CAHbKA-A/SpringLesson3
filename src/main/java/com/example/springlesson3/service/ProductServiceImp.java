@@ -1,9 +1,10 @@
 package com.example.springlesson3.service;
 
 import com.example.springlesson3.domain.Product;
-import com.example.springlesson3.interfaces.ProductRepository;
+import com.example.springlesson3.interfaces.delete_ProductRepository;
 import com.example.springlesson3.interfaces.ProductService;
 import com.example.springlesson3.util.FileUtil;
+import com.example.springlesson3.util.ProductDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,16 +17,20 @@ import java.util.List;
 @RequiredArgsConstructor /*включает в конструтор только необходимые аргументы*/
 public class ProductServiceImp implements ProductService {
 
-    private final ProductRepository productRepository;
+   // private final delete_ProductRepository productRepository;
 
     @Override
     public List<Product> getProducts() {
-        return productRepository.getAll();
+
+        //return productRepository.getAll();
+        return ProductDao.findAll();
     }
 
     @Override
     public void addProduct(Product product) {
-        productRepository.addNew(product);
+
+        //productRepository.addNew(product);
+        ProductDao.addProduct(product);
     }
 
     @Override
@@ -42,19 +47,22 @@ public class ProductServiceImp implements ProductService {
 
         }
 
-        productRepository.addNew(addProduct);
+        //productRepository.addNew(addProduct);
+        ProductDao.addProduct(addProduct);
 
 
     }
 
     @Override
     public Product getProductById(int id) {
-        return productRepository.get(id);
+        //return productRepository.get(id);
+        return ProductDao.findById(id);
 
     }
 
     @Override
     public void deleteProduct(int id) {
-        productRepository.deleteProduct(id);
+        //productRepository.deleteProduct(id);
+        ProductDao.deleteById(id);
     }
 }

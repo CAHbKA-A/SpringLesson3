@@ -43,6 +43,16 @@ public class ProductController {
         return "product/editProduct";
     }
 
+    @PostMapping("/editProduct/{id}")
+    public RedirectView editSubmit(@ModelAttribute Product editProduct, @RequestParam(required = false) MultipartFile img, @PathVariable("id") int id) {
+      //  productService.editProductWithImg(addProduct, img);
+//
+        return new RedirectView("/product");// перенаправляем на гет
+    }
+
+
+
+
     @GetMapping("/deleteProduct/{id}") //получаем форму
     public String deleteProductQuery(Model model, @PathVariable("id") int id) {
         productService.deleteProduct(id);

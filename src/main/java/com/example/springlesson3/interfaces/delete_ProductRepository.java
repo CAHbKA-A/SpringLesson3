@@ -4,7 +4,7 @@ import com.example.springlesson3.domain.Product;
 
 import java.util.List;
 
-public interface ProductRepository {
+public interface delete_ProductRepository {
     Product get(int id);
 
     List<Product> getAll();

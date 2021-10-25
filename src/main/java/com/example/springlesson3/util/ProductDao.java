@@ -3,7 +3,8 @@ package com.example.springlesson3.util;
 import com.example.springlesson3.domain.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -12,6 +13,10 @@ public class ProductDao {
 
     public static SessionFactory factory;
     public static EntityManager em;
+//    ProductDao(){
+//        ApplicationContext context = new AnnotationConfigApplicationContext(SessionFactoryBean.class);
+//        factory = context.getBean(SessionFactory.class);
+//    }
 
 
     public static Product findById(int id) {
@@ -51,7 +56,6 @@ public class ProductDao {
         sessionOne.saveOrUpdate(product);
 
 
-
 //        init();
 //       em.persist(product);
 
@@ -78,14 +82,15 @@ public class ProductDao {
     }
 
 
-
-
     private static void init() {
-        factory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .buildSessionFactory();
+        getFactory();
         em = factory.createEntityManager();
         em.getTransaction().begin();
+    }
+
+    private static void getFactory() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(SessionFactoryBean.class);
+        factory = context.getBean(SessionFactory.class);
     }
 
     private static void shutdown() {
