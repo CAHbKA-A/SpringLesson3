@@ -2,8 +2,6 @@ package com.example.springlesson3;
 /*Первый старт.
  * Готовим БД для магазина*/
 
-import com.example.springlesson3.domain.Product;
-import com.example.springlesson3.util.ProductDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -24,13 +22,17 @@ public class Install_DB_Shop {
         } finally {
             shutdown();
         }
-        System.out.println(ProductDao.findById(1));
+
+        //test
+        //  System.out.println(ProductDao.findById(1));
         //  System.out.println(ProductDao.findAll());
         //  ProductDao.deleteById(3);
         //   Product p1 = new Product("sadweq",22231,"3342132","44g45t");
         //  ProductDao.addProduct(new Product("sadweq", 22231, "3342132", "44g45t"));
         //  Product p2 = new Product("sa123123dweq", 22231, "3342132", "44g45t");
         //  SaveOrUpdate
+
+
     }
 
     private static void crateNewProductsInDB() {
