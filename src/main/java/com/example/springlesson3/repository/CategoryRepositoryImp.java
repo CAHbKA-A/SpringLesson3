@@ -25,7 +25,7 @@ public class CategoryRepositoryImp implements CategoryRepository {
         /*тут будет запрос к бд*/
         ArrayList<Category> list = new ArrayList<Category>();
         for (int i = 0; i < 10; i++) {
-            list.add(get( i));
+            list.add(get(i));
 
         }
 
