@@ -1,22 +1,24 @@
+
+/*ерунда. на каждый запрос создается по бину*/
+
 package com.example.springlesson3.util;
 
 import com.example.springlesson3.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-
 @Repository
 @RequiredArgsConstructor
 public class Delete_ProductDao {
-    //   private static SessionFactoryBean sessionFactoryBean;
-    private final SessionFactoryBean sessionFactoryBean;
-    //   public static ApplicationContext context = new AnnotationConfigApplicationContext(SessionFactoryBean.class);
-    // private  final SessionFactoryBean sessionFactoryBean;
-    public static Session factory;//= context.getBean(SessionFactory.class);
+    public static SessionFactory factory;
     public static EntityManager em;
+
 
 
     public static Product findById(int id) {
@@ -33,7 +35,7 @@ public class Delete_ProductDao {
     public static List<Product> findAll() {
         init();
         List<Product> products;
-        products = factory.createQuery("select p from Product p", Product.class).getResultList();
+        products = em.createQuery("select p from Product p", Product.class).getResultList();
         shutdown();
         return products;
     }
@@ -76,40 +78,26 @@ public class Delete_ProductDao {
 
     public static void addProduct(Product product) {
         init();
-        factory.persist(product);
+        em.persist(product);
         shutdown();
 
     }
 
-    public Product trfindById(int id) {
-        Product product;
-        //   SessionFactoryBean sessionFactoryBean = null;
-        try (Session session = sessionFactoryBean.getFactoryBean().getCurrentSession()) {
-            session.beginTransaction();
-            product = em.find(Product.class, id);
-            session.getTransaction().commit();
-        }
-        return product;
-    }
 
     private static void init() {
-        //    getFactory();
-        //   Session  session = sessionFactoryBean.getFactoryBean().getCurrentSession();
-        //  em = factory.createEntityManager();
-        // session.beginTransaction();
-        //  em.getTransaction().begin();
+        getFactory();
+        em = factory.createEntityManager();
+        em.getTransaction().begin();
     }
 
-//    private static void getFactory() {
-//         factory = sessionFactoryBean.getFactoryBean().getCurrentSession();
-//      //  ApplicationContext context = new AnnotationConfigApplicationContext(SessionFactoryBean.class);
-//     //  factory = context.getBean(SessionFactory.class);
-//    }
+    private static void getFactory() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(SessionFactoryBean.class);
+        factory = context.getBean(SessionFactory.class);
+    }
 
     private static void shutdown() {
-        factory.getTransaction().commit();
-        // factory.close();
+        em.getTransaction().commit();
+        factory.close();
     }
 }
-
 

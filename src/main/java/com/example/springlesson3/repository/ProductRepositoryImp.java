@@ -64,4 +64,35 @@ public class ProductRepositoryImp implements ProductRepository {
 
 
     }
+
+    @Override
+
+//todo добавить обработку презагрузки новвой картинки.
+    public Product saveOrUpdate(Product product) {
+        System.out.println(product);
+
+        Product productFromDB = get(product.getId());
+
+        // System.out.println(product.equals(productFromDB));
+        if (product.equals(productFromDB)) return product;
+        try (Session session = sessionFactory.getFactoryBean().getCurrentSession()) {
+            session.beginTransaction();
+            session.saveOrUpdate(product);
+            session.getTransaction().commit();
+        }
+
+
+        return null;
+    }
+
+    //       em.persist(product);
+//       em.getTransaction().commit();
+//  Product productFromDB = ProductDao.findById(id);
+//        em.getTransaction().begin();
+//        Product productFromDB  = em.find(Product.class, id);
+//        em.getTransaction().commit();
+//        em.getTransaction().begin();
+//        em.merge(productFromDB);
+//        em.merge(product);
+
 }

@@ -63,4 +63,10 @@ public class ProductServiceImp implements ProductService {
         productRepository.deleteProduct(id);
         //  ProductDao.deleteById(id);
     }
+
+    @Override
+    public Product editProduct(Product product) {
+       Product productNew = productRepository.saveOrUpdate(product);
+        return product;
+    }
 }

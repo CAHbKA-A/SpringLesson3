@@ -32,6 +32,7 @@ public class ProductController {
 
     @PostMapping("/addProduct")
     public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile img) {
+     //   System.out.println(addProduct);
         productService.addProductWithImg(addProduct, img);
 
         return new RedirectView("/product");// перенаправляем на гет
@@ -43,10 +44,12 @@ public class ProductController {
         return "product/editProduct";
     }
 
-    @PostMapping("/editProduct/{id}")
-    public RedirectView editSubmit(@ModelAttribute Product editProduct, @RequestParam(required = false) MultipartFile img, @PathVariable("id") int id) {
-      //  productService.editProductWithImg(addProduct, img);
-//
+
+    /*не работает*/
+    @PostMapping("/editProduct/**") //проверяем и едактируем
+    public RedirectView editSubmit(@ModelAttribute Product editProduct, @RequestParam(required = false) MultipartFile img) {
+       // System.out.println(editProduct);
+        productService.editProduct(editProduct);
         return new RedirectView("/product");// перенаправляем на гет
     }
 
