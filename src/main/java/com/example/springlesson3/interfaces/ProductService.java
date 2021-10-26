@@ -11,4 +11,10 @@ public interface ProductService {
     void addProduct(Product product);
 
     void addProductWithImg(Product addProduct, MultipartFile img);
+
+    Product getProductById(int id);
+
+    void deleteProduct(int id);
+
+    Product editProduct(Product product);
 }

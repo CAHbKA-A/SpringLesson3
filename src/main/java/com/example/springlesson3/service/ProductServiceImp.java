@@ -20,12 +20,16 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<Product> getProducts() {
+
         return productRepository.getAll();
+        //   return ProductDao.findAll();
     }
 
     @Override
     public void addProduct(Product product) {
+
         productRepository.addNew(product);
+        //   ProductDao.addProduct(product);
     }
 
     @Override
@@ -36,13 +40,33 @@ public class ProductServiceImp implements ProductService {
 
 
         if (img != null && !img.isEmpty()) {
-            //   System.out.println(img);
             Path path = FileUtil.uploadProductImg(img);
             addProduct.setImgLink(path.toString());
 
         }
-        System.out.println("как будто записал в БД " + addProduct);
-        //Обращение к бд - добавляем продукт c  сылкой на картинку
 
+        productRepository.addNew(addProduct);
+        //  ProductDao.addProduct(addProduct);
+
+
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        return productRepository.get(id);
+        // return ProductDao.findById(id);
+
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        productRepository.deleteProduct(id);
+        //  ProductDao.deleteById(id);
+    }
+
+    @Override
+    public Product editProduct(Product product) {
+       Product productNew = productRepository.saveOrUpdate(product);
+        return product;
     }
 }

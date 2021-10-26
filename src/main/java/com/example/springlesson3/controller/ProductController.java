@@ -23,7 +23,7 @@ public class ProductController {
         return "product/productList";
     }
 
-//вот так не получается. все в одном классе.
+
     @GetMapping("/addProduct") //получаем форму
     public String addForm(Model model) {
         model.addAttribute("addProduct", new Product());
@@ -33,11 +33,35 @@ public class ProductController {
     @PostMapping("/addProduct")
     public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile img) {
      //   System.out.println(addProduct);
-     //   System.out.println(img);
-
         productService.addProductWithImg(addProduct, img);
 
         return new RedirectView("/product");// перенаправляем на гет
+    }
+
+    @GetMapping("/editProduct/{id}") //получаем форму
+    public String editForm(Model model, @PathVariable("id") int id) {
+        model.addAttribute("editProduct", productService.getProductById(id));
+        return "product/editProduct";
+    }
+
+
+    /*не работает*/
+    @PostMapping("/editProduct/**") //проверяем и едактируем
+    public RedirectView editSubmit(@ModelAttribute Product editProduct, @RequestParam(required = false) MultipartFile img) {
+       // System.out.println(editProduct);
+        productService.editProduct(editProduct);
+        return new RedirectView("/product");// перенаправляем на гет
+    }
+
+
+
+
+    @GetMapping("/deleteProduct/{id}") //получаем форму
+    public String deleteProductQuery(Model model, @PathVariable("id") int id) {
+        productService.deleteProduct(id);
+
+        return("/product/ok");
+       // return("/product");
     }
 
 

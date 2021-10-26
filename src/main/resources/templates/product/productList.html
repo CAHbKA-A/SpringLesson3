@@ -25,16 +25,20 @@
         <!--стиль карт, отступы -->
         <div class="row rows-cols-auto mt-5 mb-5">
 
-            <div th:each="product :${products}" class="card  me-2 mb-2" style="width: 18rem;">
-                <img src="https://cdn.lifehacker.ru/wp-content/uploads/2014/05/frame_1581322506-288x144.jpg"
+            <div th:each="product :${products}" class="card  me-2 mb-2 " style="width: 18rem;">
+                <img th:src="${product.imgLink}"
                      class="card-img-top" alt="...">
                 <div class="card-body">
                     <h2 th:text="${product.title}" class="card-title">Card</h2>
                     <h5 th:text="${'Цена '+product.cost+' $'}" class="card-title"> $</h5>
 
                     <p th:text="${product.description}" class="card-text"></p>
-                    <a href="#" class="btn btn-primary">Подробнее</a>
-                    <a href="#" class="btn btn-primary">В корзину</a>
+                    <a th:href="${'http://localhost:8080/productOverview/'+product.id}" class="btn btn-primary">Подробнее</a>
+                    <a href="#" class="btn btn-primary">В корзину</a> </br>
+
+<!--                  Кнопка будет скрываться если не хватает прав-->
+                    <a th:href="${'http://localhost:8080/editProduct/'+product.id}" class="btn btn-primary">edit</a>
+                    <a th:href="${'http://localhost:8080/deleteProduct/'+product.id}" class="btn btn-primary">delete</a>
 
 
                 </div>
