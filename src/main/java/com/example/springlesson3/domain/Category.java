@@ -27,7 +27,6 @@ public class Category {
 
     @Column
     private String pathUrl;
-//
-//    @ManyToMany(mappedBy = "categories")
-//    private Set<Product> products = new HashSet<>();
+
+
 }

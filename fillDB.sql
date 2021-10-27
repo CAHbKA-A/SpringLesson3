@@ -4,14 +4,14 @@ BEGIN;
 DROP TABLE IF EXISTS products CASCADE;
 CREATE TABLE products
 (
-    id_products          bigserial PRIMARY KEY,
-    title_products       VARCHAR(255),
-    cost_products        int,
-    description_products VARCHAR(255),
-    categoryId_products  bigint,
-    imgLink_products     VARCHAR(255)
+    id_product          bigserial PRIMARY KEY,
+    title_product       VARCHAR(255),
+    cost_product        int,
+    description_product VARCHAR(255),
+    categoryId_product  bigint,
+    imgLink_product     VARCHAR(255)
 );
-INSERT INTO products (id_products, title_products, cost_products, description_products, categoryId_products, imgLink_products)
+INSERT INTO products (id_product, title_product, cost_product, description_product, categoryId_product, imgLink_product)
 VALUES (1, 'product1', 123, 'blahbla2h1', 23, 'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
        (2, 'product2', 1223, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
        (3, 'product3', 1223, 'blahblah1', 24, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
@@ -24,7 +24,7 @@ VALUES (1, 'product1', 123, 'blahbla2h1', 23, 'https://upload.wikimedia.org/wiki
 DROP TABLE IF EXISTS categories CASCADE;
 CREATE TABLE categories
 (
-    category_id           bigserial PRIMARY KEY,
+    category_id  bigserial PRIMARY KEY,
     nameCategory VARCHAR(255) not null unique,
     pathUrl      VARCHAR(255)
 );
