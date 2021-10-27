@@ -16,7 +16,6 @@
 
     <mapping class="com.example.springlesson3.domain.Product"/>
     <mapping class="com.example.springlesson3.domain.Category"/>
-    <mapping class="com.example.springlesson3.domain.Customer"/>
-    <mapping class="com.example.springlesson3.domain.Order"/>
+
 </session-factory>
 </hibernate-configuration>

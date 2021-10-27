@@ -1,13 +1,11 @@
 package com.example.springlesson3.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /*класс хранит только состояние и ни какой бизнеслогики*/
 @Data
@@ -19,24 +17,24 @@ import java.util.Set;
 public class Product {
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id_products")
     private int id;
 
-    @Column
+    @Column (name = "title_products")
     @NonNull
     private String title;
 
-    @Column
+    @Column(name = "cost_products")
     @NonNull
     private int cost;
 
-    @Column
+    @Column (name = "description_products")
     @NonNull
     private String description;
 
 
 
-    @Column
+    @Column(name = "imgLink_products")
     @NonNull
     private String imgLink;
 

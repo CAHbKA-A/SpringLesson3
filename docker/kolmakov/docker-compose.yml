@@ -7,16 +7,14 @@ volumes:
 services:
   postgres:
     image: postgres:latest
-    container_name: GB_Kolmakov_container
+    container_name: simple-app-test-postgres
     volumes:
       - type: volume
         source: simple-app-test-postgres
         target: /var/lib/postgresql/dataConfig
     environment:
-      POSTGRES_DB: GB_Shop
+      POSTGRES_DB: simple-app-test
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
     ports:
       - "5432:5432"
-
-
