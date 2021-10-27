@@ -1,11 +1,13 @@
 package com.example.springlesson3.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /*класс хранит только состояние и ни какой бизнеслогики*/
 @Data
@@ -32,12 +34,21 @@ public class Product {
     @NonNull
     private String description;
 
-    //  private Category categoryId;
+
 
     @Column
     @NonNull
     private String imgLink;
 
+
+//    @JsonIgnore
+//    @ManyToMany
+//    @JoinTable(
+//            name = "categories",
+//            joinColumns = @JoinColumn(name = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "category_id")
+//    )
+//    private Set<Category> categories;
 
 }
 
