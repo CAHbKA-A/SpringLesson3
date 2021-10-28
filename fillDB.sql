@@ -39,17 +39,17 @@ VALUES (1, 'Catregory1', '1'),
 DROP TABLE IF EXISTS customers CASCADE;
 create table customers
 (
-    id               serial,
+    customer_id               serial,
     customer_name    varchar(255) not null,
     customer_balance int default 0
 );
 
 create unique index customers_id_uindex
-    on customers (id);
+    on customers (customer_id);
 
 alter table customers
     add constraint customers_pk
-        primary key (id);
+        primary key (customer_id);
 
 INSERT INTO customers (customer_name, customer_balance)
 VALUES ('Alex', 0),
@@ -65,8 +65,8 @@ create table orders
     order_id     serial
         constraint orders_pk
             primary key,
-    customer_id  integer,
-    total_cost   integer,
+    order_customer_id  integer,
+    order_total_cost   integer,
     order_status varchar(255),
     order_update date
 );
@@ -75,9 +75,10 @@ create table orders
 create unique index orders_order_id_uindex
     on orders (order_id);
 
-INSERT INTO orders (customer_id, total_cost, order_status, order_update)
+INSERT INTO orders (order_customer_id, order_total_cost, order_status, order_update)
 VALUES (1, 123, 'added', '2021-10-27'),
-       (2, 24324, 'added', '2021-10-26');
+       (2, 24324, 'added', '2021-10-26'),
+       (3, 24544, 'added', '2021-10-28');
 
 
 DROP TABLE IF EXISTS orders_products CASCADE;
@@ -89,11 +90,35 @@ create table orders_products
     count      integer default 0
 );
 
+
+
 INSERT INTO orders_products (order_id, product_id, cost, count)
 VALUES (1, 1, 100, 2),
        (1, 2, 200, 1),
        (2, 1, 100, 2),
+       (2, 4, 100, 5),
+       (1, 1, 100, 2),
+       (3, 4, 100, 23),
        (2, 4, 100, 5);
+
+
+DROP TABLE IF EXISTS product_category CASCADE;
+create table product_category
+(
+    id_product  integer not null,
+    category_id integer not null,
+    constraint product_category_pkey
+        primary key (id_product, category_id)
+);
+
+
+INSERT INTO product_category (id_product, category_id)
+VALUES (1, 2),
+       (1, 3),
+       (1, 1),
+       (2, 2),
+       (3, 2);
+
 
 
 COMMIT;
