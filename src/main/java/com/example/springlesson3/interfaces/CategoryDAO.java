@@ -4,7 +4,7 @@ import com.example.springlesson3.domain.Category;
 
 import java.util.List;
 
-public interface CategoryRepository {
+public interface CategoryDAO {
 
     Category get (int id);
 

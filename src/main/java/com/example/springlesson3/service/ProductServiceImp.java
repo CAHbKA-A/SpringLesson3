@@ -1,8 +1,12 @@
 package com.example.springlesson3.service;
 
+import com.example.springlesson3.domain.Order;
 import com.example.springlesson3.domain.Product;
-import com.example.springlesson3.interfaces.ProductRepository;
+import com.example.springlesson3.interfaces.CustomerDAO;
+import com.example.springlesson3.interfaces.OrderDAO;
+import com.example.springlesson3.interfaces.ProductDAO;
 import com.example.springlesson3.interfaces.ProductService;
+import com.example.springlesson3.repository.CustomerRepositoryImp;
 import com.example.springlesson3.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,19 +20,21 @@ import java.util.List;
 @RequiredArgsConstructor /*включает в конструтор только необходимые аргументы*/
 public class ProductServiceImp implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductDAO productDAO;
+    private final CustomerDAO customerDAO;
 
     @Override
     public List<Product> getProducts() {
+//        System.out.println(customerDAO.get(1));
 
-        return productRepository.getAll();
+        return productDAO.getAll();
         //   return ProductDao.findAll();
     }
 
     @Override
     public void addProduct(Product product) {
 
-        productRepository.addNew(product);
+        productDAO.addNew(product);
         //   ProductDao.addProduct(product);
     }
 
@@ -45,7 +51,7 @@ public class ProductServiceImp implements ProductService {
 
         }
 
-        productRepository.addNew(addProduct);
+        productDAO.addNew(addProduct);
         //  ProductDao.addProduct(addProduct);
 
 
@@ -53,20 +59,20 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Product getProductById(int id) {
-        return productRepository.get(id);
+        return productDAO.get(id);
         // return ProductDao.findById(id);
 
     }
 
     @Override
     public void deleteProduct(int id) {
-        productRepository.deleteProduct(id);
+        productDAO.deleteProduct(id);
         //  ProductDao.deleteById(id);
     }
 
     @Override
     public Product editProduct(Product product) {
-       Product productNew = productRepository.saveOrUpdate(product);
+       Product productNew = productDAO.saveOrUpdate(product);
         return product;
     }
 }
