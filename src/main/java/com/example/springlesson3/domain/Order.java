@@ -58,4 +58,16 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "order_customer_id", insertable = false, updatable = false)
     private Customer customers;
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", cost=" + cost +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", publicationDate=" + publicationDate +
+
+                '}';
+    }
 }

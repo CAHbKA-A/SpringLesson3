@@ -1,7 +1,6 @@
 package com.example.springlesson3.repository;
 
 import com.example.springlesson3.domain.Product;
-import com.example.springlesson3.interfaces.CategoryDAO;
 import com.example.springlesson3.interfaces.ProductDAO;
 import com.example.springlesson3.util.SessionFactoryBean;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ProductRepositoryImp implements ProductDAO {
-      private final SessionFactoryBean sessionFactory;
+    private final SessionFactoryBean sessionFactory;
 
     @Override
     public Product get(int id) {

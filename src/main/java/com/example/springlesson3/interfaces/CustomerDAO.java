@@ -9,6 +9,6 @@ public interface CustomerDAO {
     //список заказанных продуктов покупателем id
     public List<Product> getOrderProducts(int id);
     public List<Order> getOrders(int customer_id);
-//    public Order get(int id);
+   public Order get(int id);
 
 }

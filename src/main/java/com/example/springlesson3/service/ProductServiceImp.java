@@ -1,12 +1,9 @@
 package com.example.springlesson3.service;
 
-import com.example.springlesson3.domain.Order;
 import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.CustomerDAO;
-import com.example.springlesson3.interfaces.OrderDAO;
 import com.example.springlesson3.interfaces.ProductDAO;
 import com.example.springlesson3.interfaces.ProductService;
-import com.example.springlesson3.repository.CustomerRepositoryImp;
 import com.example.springlesson3.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,8 +22,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<Product> getProducts() {
-//        System.out.println(customerDAO.get(1));
-
+    //    System.out.println(customerDAO.getOrders(1));
         return productDAO.getAll();
         //   return ProductDao.findAll();
     }
@@ -72,7 +68,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Product editProduct(Product product) {
-       Product productNew = productDAO.saveOrUpdate(product);
+        Product productNew = productDAO.saveOrUpdate(product);
         return product;
     }
 }

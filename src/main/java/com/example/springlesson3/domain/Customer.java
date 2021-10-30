@@ -1,6 +1,5 @@
 package com.example.springlesson3.domain;
 
-import com.example.springlesson3.interfaces.CustomerDAO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -10,13 +9,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-
 @RequiredArgsConstructor
 @NoArgsConstructor
 
 @Entity
 @Table(name = "customers")
-public class Customer  {
+public class Customer {
 
 
     @Id
@@ -33,9 +31,8 @@ public class Customer  {
     private String customerBalance;
 
     /*1 покуптель может сделть много закзов*/
-    @OneToMany(mappedBy = "customers")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "customers")
     List<Order> orders;
-
 
 
 }
