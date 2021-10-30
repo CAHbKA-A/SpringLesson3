@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface CustomerDAO {
     //список заказанных продуктов покупателем id
-    public List<Product> getOrderProducts(int id);
-    public List<Order> getOrders(int customer_id);
-   public Order get(int id);
+    public List<Product> getOrderProductsByCustomerId(int id);
+
+    public List<Order> getOrdersByCustomerId(int customer_id);
+
+    public Order get(int id);
+
+    public int getProductIDByOdderId(int id);
 
 }

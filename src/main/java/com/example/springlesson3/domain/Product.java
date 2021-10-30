@@ -22,7 +22,7 @@ public class Product {
     @Column(name = "id_product")
     private int id;
 
-    @Column (name = "title_product")
+    @Column(name = "title_product")
     @NonNull
     private String title;
 
@@ -30,10 +30,9 @@ public class Product {
     @NonNull
     private int cost;
 
-    @Column (name = "description_product")
+    @Column(name = "description_product")
     @NonNull
     private String description;
-
 
 
     @Column(name = "imgLink_product")
@@ -51,10 +50,6 @@ public class Product {
     private Set<Category> categories;
 
 
-
-
-
-
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -63,6 +58,8 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> orders;
+
+
 }
 
 

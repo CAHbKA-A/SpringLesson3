@@ -30,8 +30,9 @@ public class Customer {
     @NonNull
     private String customerBalance;
 
+
     /*1 покуптель может сделть много закзов*/
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "customers")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customers")
     List<Order> orders;
 
 

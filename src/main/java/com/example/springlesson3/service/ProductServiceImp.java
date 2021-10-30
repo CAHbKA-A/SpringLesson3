@@ -22,16 +22,16 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<Product> getProducts() {
-    //    System.out.println(customerDAO.getOrders(1));
+        //  System.out.println(customerDAO.getOrdersByCustomerId(2));
+        // customerDAO.getOrderProductsByCustomerId(1);
+        // System.out.println(customerDAO.get(1));
         return productDAO.getAll();
-        //   return ProductDao.findAll();
     }
 
     @Override
     public void addProduct(Product product) {
 
         productDAO.addNew(product);
-        //   ProductDao.addProduct(product);
     }
 
     @Override
@@ -44,26 +44,19 @@ public class ProductServiceImp implements ProductService {
         if (img != null && !img.isEmpty()) {
             Path path = FileUtil.uploadProductImg(img);
             addProduct.setImgLink(path.toString());
-
         }
-
         productDAO.addNew(addProduct);
-        //  ProductDao.addProduct(addProduct);
-
 
     }
 
     @Override
     public Product getProductById(int id) {
         return productDAO.get(id);
-        // return ProductDao.findById(id);
-
     }
 
     @Override
     public void deleteProduct(int id) {
         productDAO.deleteProduct(id);
-        //  ProductDao.deleteById(id);
     }
 
     @Override
