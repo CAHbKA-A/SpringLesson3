@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -17,7 +19,7 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue
-    @Column
+    @Column(name = "category_id")
     private int id;
 
     @Column
@@ -25,4 +27,8 @@ public class Category {
 
     @Column
     private String pathUrl;
+
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 }

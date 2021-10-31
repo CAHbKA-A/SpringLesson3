@@ -1,14 +1,14 @@
 package com.example.springlesson3.repository;
 
 import com.example.springlesson3.domain.Category;
-import com.example.springlesson3.interfaces.CategoryRepository;
+import com.example.springlesson3.interfaces.CategoryDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CategoryRepositoryImp implements CategoryRepository {
+public class CategoryRepositoryImp implements CategoryDAO {
     @Override
     public Category get(int id) {
 

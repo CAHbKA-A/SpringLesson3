@@ -1,8 +1,7 @@
 package com.example.springlesson3.repository;
 
 import com.example.springlesson3.domain.Product;
-import com.example.springlesson3.interfaces.CategoryRepository;
-import com.example.springlesson3.interfaces.ProductRepository;
+import com.example.springlesson3.interfaces.ProductDAO;
 import com.example.springlesson3.util.SessionFactoryBean;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
@@ -12,13 +11,12 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductRepositoryImp implements ProductRepository {
-    private final CategoryRepository categoryRepository;
+public class ProductRepositoryImp implements ProductDAO {
     private final SessionFactoryBean sessionFactory;
 
     @Override
     public Product get(int id) {
-        //    return ProductDao.findById(id);
+
         Product product;
         try (Session session = sessionFactory.getFactoryBean().getCurrentSession()) {
             session.beginTransaction();
@@ -30,7 +28,7 @@ public class ProductRepositoryImp implements ProductRepository {
 
     @Override
     public List<Product> getAll() {
-        //  return ProductDao.findAll();
+
         List<Product> products;
         try (Session session = sessionFactory.getFactoryBean().getCurrentSession()) {
             session.beginTransaction();
@@ -44,7 +42,6 @@ public class ProductRepositoryImp implements ProductRepository {
     @Override
     public void addNew(Product product) {
 
-        //ProductDao.addProduct(product);
         try (Session session = sessionFactory.getFactoryBean().getCurrentSession()) {
             session.beginTransaction();
             session.persist(product);
@@ -55,7 +52,7 @@ public class ProductRepositoryImp implements ProductRepository {
     @Override
     public void deleteProduct(int id) {
         Product product = get(id);
-        //   ProductDao.deleteById(id);
+
         try (Session session = sessionFactory.getFactoryBean().getCurrentSession()) {
             session.beginTransaction();
             session.remove(product);
@@ -67,7 +64,7 @@ public class ProductRepositoryImp implements ProductRepository {
 
     @Override
 
-//todo добавить обработку презагрузки новвой картинки.
+//todo добавить обработку презагрузки новой картинки.
     public Product saveOrUpdate(Product product) {
         System.out.println(product);
 

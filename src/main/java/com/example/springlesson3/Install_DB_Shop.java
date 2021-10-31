@@ -2,6 +2,7 @@ package com.example.springlesson3;
 /*Первый старт.
  * Готовим БД для магазина*/
 
+import com.example.springlesson3.repository.CustomerRepositoryImp;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
