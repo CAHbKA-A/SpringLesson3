@@ -1,8 +1,8 @@
 package com.example.springlesson3.service;
 
 import com.example.springlesson3.domain.Product;
-import com.example.springlesson3.interfaces.CustomerDAO;
-import com.example.springlesson3.interfaces.ProductDAO;
+import com.example.springlesson3.interfaces.CustomerRepository;
+import com.example.springlesson3.interfaces.ProductRepository;
 import com.example.springlesson3.interfaces.ProductService;
 import com.example.springlesson3.util.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -17,51 +17,50 @@ import java.util.List;
 @RequiredArgsConstructor /*включает в конструтор только необходимые аргументы*/
 public class ProductServiceImp implements ProductService {
 
-    private final ProductDAO productDAO;
-    private final CustomerDAO customerDAO;
+    private final ProductRepository productRepository;
+    private final CustomerRepository customerDAO;
 
     @Override
     public List<Product> getProducts() {
         //  System.out.println(customerDAO.getOrdersByCustomerId(2));
         // customerDAO.getOrderProductsByCustomerId(1);
         // System.out.println(customerDAO.get(1));
-        return productDAO.getAll();
+        return productRepository.findAll();
     }
 
-    @Override
-    public void addProduct(Product product) {
-
-        productDAO.addNew(product);
-    }
+//    @Override
+//    public void addProduct(Product product) {
+//
+//        productRepository.addNew(product);
+//    }
 
     @Override
     public void addProductWithImg(Product addProduct, MultipartFile img) {
 
         //сохроняем картинку
-//todo проверить размер или делать утилиту ужималки
 
 
         if (img != null && !img.isEmpty()) {
             Path path = FileUtil.uploadProductImg(img);
             addProduct.setImgLink(path.toString());
         }
-        productDAO.addNew(addProduct);
+        productRepository.save(addProduct);
 
     }
 
     @Override
     public Product getProductById(int id) {
-        return productDAO.get(id);
+        return productRepository.getById(id);
     }
 
     @Override
     public void deleteProduct(int id) {
-        productDAO.deleteProduct(id);
+        productRepository.deleteById(id);
     }
 
     @Override
     public Product editProduct(Product product) {
-        Product productNew = productDAO.saveOrUpdate(product);
+        Product productNew = productRepository.save(product);
         return product;
     }
 }

@@ -35,7 +35,7 @@ public class Product {
     private String description;
 
 
-    @Column(name = "imgLink_product")
+    @Column(name = "imglink_product")
     @NonNull
     private String imgLink;
 
