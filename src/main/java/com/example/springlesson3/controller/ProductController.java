@@ -3,6 +3,7 @@ package com.example.springlesson3.controller;
 import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,16 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @GetMapping("page")
+    @ResponseBody
+    public Page<Product> getProductPage(){
+        return productService.getProducts();
+    }
+
+
     @GetMapping("/product")
     public String getProducts(Model model) {
-        model.addAttribute("products", productService.getProducts());
+        model.addAttribute("products", productService.getProducts().getContent());
 
         return "product/productList";
     }

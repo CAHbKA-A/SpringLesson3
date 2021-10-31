@@ -6,14 +6,17 @@ import com.example.springlesson3.interfaces.ProductRepository;
 import com.example.springlesson3.interfaces.ProductService;
 import com.example.springlesson3.util.FileUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
-import java.util.List;
 
 @Service
-//@ToString
+
 @RequiredArgsConstructor /*включает в конструтор только необходимые аргументы*/
 public class ProductServiceImp implements ProductService {
 
@@ -21,18 +24,15 @@ public class ProductServiceImp implements ProductService {
     private final CustomerRepository customerDAO;
 
     @Override
-    public List<Product> getProducts() {
-        //  System.out.println(customerDAO.getOrdersByCustomerId(2));
-        // customerDAO.getOrderProductsByCustomerId(1);
-        // System.out.println(customerDAO.get(1));
-        return productRepository.findAll();
+    public Page<Product> getProducts() {
+
+        //   return productRepository.findAll(); - вообще все
+        //постранично
+        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
+        return productRepository.findAll(pageable);
+
     }
 
-//    @Override
-//    public void addProduct(Product product) {
-//
-//        productRepository.addNew(product);
-//    }
 
     @Override
     public void addProductWithImg(Product addProduct, MultipartFile img) {

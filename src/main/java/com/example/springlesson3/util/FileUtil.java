@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 
 ////будем сохранять в localhost:8080/img/{id}123.jpg
 public class FileUtil {
+    private static final String IMG_FOLDER = "/Data/img/product";
+
     private FileUtil() {
     }
 
@@ -17,7 +19,7 @@ public class FileUtil {
         Path path = null;
         if (!fileImg.isEmpty()) {
 
-            String dir = System.getProperty("user.dir") + "/img/product";
+            String dir = System.getProperty("user.dir") + IMG_FOLDER;
             path = Paths.get(dir);
             //     System.out.println(path);
 
@@ -29,7 +31,10 @@ public class FileUtil {
             saveAsFile(fileImg, path);
 
 
+        } else {
+            throw new IllegalArgumentException("file is null!!");
         }
+
         return path;
 
     }
@@ -39,7 +44,7 @@ public class FileUtil {
             try {
                 Files.createDirectory(path);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException("i cannot create directory!! " + path);
             }
         }
     }
@@ -49,7 +54,7 @@ public class FileUtil {
             //  System.out.println(path);
             file.transferTo(path);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("cannot save image file " + path);
         }
 
     }
