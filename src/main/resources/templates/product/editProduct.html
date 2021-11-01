@@ -17,7 +17,7 @@
     <h1>Lets edit </h1>
     <form action="#" th:action="@{/editProduct}" th:object="${editProduct}" method="post" enctype="multipart/form-data">
 
-        <p>Id: <input type="text"  th:field="*{id}"/></p> Смотри , но не трогай! Изменишь ID = задублируется или измениться другой продукт.
+        <p>Id: <input type="text"  th:field="*{id}"/>Смотри , но не трогай! Изменишь ID = задублируется или измениться другой продукт.</p>
         <p>Title: <input type="text" th:field="*{title}"/></p>
         <p>cost: <input type="text" placeholder="88" th:field="*{cost}"/>например 123 (пока инт)</p>
         <p>description: <input type="text" th:field="*{description}"/></p>

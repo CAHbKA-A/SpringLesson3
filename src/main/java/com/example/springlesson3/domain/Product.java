@@ -24,7 +24,7 @@ public class Product {
 
     @Column(name = "title_product")
     @NonNull
-    @NaturalId
+  //  @NaturalId
     private String title;
 
     @Column(name = "cost_product")

@@ -18,7 +18,9 @@
     <!--подставляем шапку -->
     <div th:replace="~{Parts/header::header}"></div>
 
-    <h1>список продуктов</h1>
+    <h1>список продуктов </h1>
+<!--    <p th:text="${'Страница '+ currentPage+ ' из '+page.getPageSize()}"> </p>-->
+    <p th:text="${'Страница '+ currentPage+ ' из '+totalPage}"> </p>
 
 
     <div class="contaiter">

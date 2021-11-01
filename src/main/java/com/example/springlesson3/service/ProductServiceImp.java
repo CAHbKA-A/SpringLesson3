@@ -27,6 +27,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     public Page<Product> getProducts() {
         Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
+        System.out.println(pageable);
         return productRepository.findAll(pageable);
 
     }
@@ -76,7 +77,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable) {
-
+        //todo проверку кривых рук
         return productRepository.findAllByCostLessThanEqualAndCostGreaterThanEqual(maxCost, minCost, pageable);
     }
 }
