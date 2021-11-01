@@ -77,7 +77,22 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable) {
-        //todo проверку кривых рук
+        // проверка кривых рук
+        if(maxCost==null){//если мин макс перепутано меняем местамии
+            maxCost = Integer.MAX_VALUE;
+
+        }
+        if(minCost==null){//если мин макс перепутано меняем местамии
+            minCost = 0;
+
+        }
+        if(minCost>maxCost){//если мин макс перепутано , меняем местамии
+            maxCost = minCost+maxCost;
+            minCost =maxCost-minCost;
+            maxCost= maxCost-minCost;
+        }
+
+
         return productRepository.findAllByCostLessThanEqualAndCostGreaterThanEqual(maxCost, minCost, pageable);
     }
 }
