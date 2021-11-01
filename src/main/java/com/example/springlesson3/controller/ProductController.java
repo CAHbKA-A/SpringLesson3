@@ -25,14 +25,14 @@ public class ProductController {
     public String SearchProducts(Model model,
                                  @RequestParam(value = "minCost", required = false) Integer minCost,
                                  @RequestParam(value = "maxCost", required = false) Integer maxCost) {
-      //  System.out.println(minCost + "  " + maxCost);
+        //  System.out.println(minCost + "  " + maxCost);
         Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
         Page<Product> page = productService.findAllByCostLessThanEqualAndCostGreaterThanEqual(minCost, maxCost, pageable);
         System.out.println(page);
         model.addAttribute("products", page.getContent());
-        model.addAttribute("currentPage", page.getPageable().getPageNumber()+1);
-       //тут какой то косяк Page 1 of 1 containing com.example.springlesson3.domain.Product instances а пишет 9
-        model.addAttribute("totalPage",page.getPageable().getPageSize());
+        model.addAttribute("currentPage", page.getPageable().getPageNumber() + 1);
+        //тут какой то косяк Page 1 of 1 containing com.example.springlesson3.domain.Product instances а пишет 9
+        model.addAttribute("totalPage", page.getPageable().getPageSize());
         return "product/productList";
     }
 
@@ -51,7 +51,7 @@ public class ProductController {
     @GetMapping("/product")
     public String getProducts(Model model) {
         model.addAttribute("products", productService.getProducts().getContent());
-        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber()+1);
+        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
         model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
 
         return "product/productList";
@@ -59,18 +59,13 @@ public class ProductController {
     }
 
 
-
-
     @GetMapping("/product/{id}") //получаем форму
     public String findProductById(Model model, @PathVariable("id") int id) {
         model.addAttribute("products", productService.getProductById(id));
         model.addAttribute("currentPage", 1);
-        model.addAttribute("totalPage",1);
+        model.addAttribute("totalPage", 1);
         return ("product/productList");
     }
-
-
-
 
 
     @GetMapping("/addProduct") //получаем форму
