@@ -4,6 +4,9 @@ import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +20,23 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping("page")
-    @ResponseBody
-    public Page<Product> getProductPage(){
-        return productService.getProducts();
+//    @GetMapping("page")
+//    @ResponseBody
+//    public Page<Product> getProductPage() {
+//        return productService.getProducts();
+//    }
+
+    //
+    @GetMapping("search")
+    public String SearchProducts(Model model,
+                                 @RequestParam(value = "minCost", required = false) Integer minCost,
+                                 @RequestParam(value = "maxCost", required = false) Integer maxCost) {
+        System.out.println(minCost + "  " + maxCost);
+        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
+        Page<Product> page = productService.findAllByCostLessThanEqualAndCostGreaterThanEqual(minCost, maxCost, pageable);
+        System.out.println(page);
+        model.addAttribute("products", page.getContent());
+        return "product/productList";
     }
 
 
@@ -29,7 +45,29 @@ public class ProductController {
         model.addAttribute("products", productService.getProducts().getContent());
 
         return "product/productList";
+
     }
+
+
+    @GetMapping("/product/{id}") //получаем форму
+    public String findProductById(Model model, @PathVariable("id") int id) {
+        model.addAttribute("products", productService.getProductById(id));
+
+        return ("product/productList");
+    }
+
+
+// не смое через кондишн
+// @PostMapping("/product/**") //
+//    public String productSearch(Model model,@ModelAttribute Product editProduct,
+//                                      @RequestParam(required = false) int minCost,
+//                                      @RequestParam(required = false) int maxCost) {
+//
+//         System.out.println(maxCost+"  "+minCost);
+//        model.addAttribute("products", getProductByCondition(@RequestBody ProductSearchCondition searchCondition);
+//   //     model.addAttribute("products", productService.getProductById(id));
+//        return ("product/productList");
+//    }
 
 
     @GetMapping("/addProduct") //получаем форму
@@ -39,8 +77,9 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile img) {
-     //   System.out.println(addProduct);
+    public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile
+            img) {
+        //   System.out.println(addProduct);
         productService.addProductWithImg(addProduct, img);
 
         return new RedirectView("/product");// перенаправляем на гет
@@ -53,23 +92,21 @@ public class ProductController {
     }
 
 
-    /*не работает*/
     @PostMapping("/editProduct/**") //проверяем и едактируем
-    public RedirectView editSubmit(@ModelAttribute Product editProduct, @RequestParam(required = false) MultipartFile img) {
-       // System.out.println(editProduct);
+    public RedirectView editSubmit(@ModelAttribute Product
+                                           editProduct, @RequestParam(required = false) MultipartFile img) {
+        // System.out.println(editProduct);
         productService.editProduct(editProduct);
         return new RedirectView("/product");// перенаправляем на гет
     }
-
-
 
 
     @GetMapping("/deleteProduct/{id}") //получаем форму
     public String deleteProductQuery(Model model, @PathVariable("id") int id) {
         productService.deleteProduct(id);
 
-        return("/product/ok");
-       // return("/product");
+        return ("/product/ok");
+
     }
 
 

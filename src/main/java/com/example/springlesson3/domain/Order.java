@@ -1,16 +1,13 @@
 package com.example.springlesson3.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
-
-@Data
+@Getter
+@Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
 

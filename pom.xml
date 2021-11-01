@@ -80,6 +80,15 @@
             <version>2.5.6</version>
         </dependency>
 
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-jpamodelgen</artifactId>-->
+<!--            <version>5.6.1.Final</version>-->
+
+<!--        </dependency>-->
+
+
     </dependencies>
 
     <build>

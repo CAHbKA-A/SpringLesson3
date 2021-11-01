@@ -4,6 +4,7 @@ import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.CustomerRepository;
 import com.example.springlesson3.interfaces.ProductRepository;
 import com.example.springlesson3.interfaces.ProductService;
+import com.example.springlesson3.repository.specification.ProductSearchSpecification;
 import com.example.springlesson3.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,10 +26,18 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Page<Product> getProducts() {
+        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
+        return productRepository.findAll(pageable);
 
-        //   return productRepository.findAll(); - вообще все
+    }
+
+    @Override
+    public Page<Product> SearchProducts() {
         //постранично
         Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
+        ProductSearchSpecification productSearchSpecification = new ProductSearchSpecification(null);
+        productRepository.findAll(productSearchSpecification);
+
         return productRepository.findAll(pageable);
 
     }
@@ -62,5 +71,12 @@ public class ProductServiceImp implements ProductService {
     public Product editProduct(Product product) {
         Product productNew = productRepository.save(product);
         return product;
+    }
+
+
+    @Override
+    public Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable) {
+
+        return productRepository.findAllByCostLessThanEqualAndCostGreaterThanEqual(maxCost, minCost, pageable);
     }
 }
