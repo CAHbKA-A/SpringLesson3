@@ -1,15 +1,13 @@
 package com.example.springlesson3.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,10 +20,10 @@ public class Category {
     @Column(name = "category_id")
     private int id;
 
-    @Column
+    @Column(name ="nameCategory")
     private String nameCategory;
 
-    @Column
+    @Column(name ="pathUrl")
     private String pathUrl;
 
 

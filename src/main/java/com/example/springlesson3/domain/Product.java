@@ -1,29 +1,30 @@
 package com.example.springlesson3.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.Set;
 
 /*класс хранит только состояние и ни какой бизнеслогики*/
-@Data
+@Getter
+@Setter
+@Builder
 @RequiredArgsConstructor
 @NoArgsConstructor
-
+@AllArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
     private int id;
 
     @Column(name = "title_product")
     @NonNull
+  //  @NaturalId
     private String title;
 
     @Column(name = "cost_product")
@@ -35,7 +36,7 @@ public class Product {
     private String description;
 
 
-    @Column(name = "imgLink_product")
+    @Column(name = "imglink_product")
     @NonNull
     private String imgLink;
 
