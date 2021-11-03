@@ -2,12 +2,10 @@ package com.example.springlesson3.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.NotNull;
 import javax.xml.transform.Source;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,12 +28,12 @@ public class Product implements Source {
     @Column(name = "title_product")
     @NonNull
     @NotBlank(message = "Название обязательно")
-  //  @NaturalId
+    //  @NaturalId
     private String title;
 
     @Column(name = "cost_product")
-    @PositiveOrZero(message = "Не может быть отрицательным")
-    @NonNull
+    @NotNull(message = "Цена обязательна")
+
     private Integer cost;
 
     @Column(name = "description_product")

@@ -39,10 +39,10 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "parentId")
-//    @ToString.Exclude
-//    private Set<Category> subCategories;
+    @JsonIgnore
+    @OneToMany(mappedBy = "parentId")
+    @ToString.Exclude
+    private Set<Category> subCategories;
 
     @Override
     public boolean equals(Object o) {

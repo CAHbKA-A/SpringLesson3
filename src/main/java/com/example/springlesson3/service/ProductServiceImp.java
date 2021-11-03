@@ -1,7 +1,6 @@
 package com.example.springlesson3.service;
 
 import com.example.springlesson3.domain.Product;
-import com.example.springlesson3.interfaces.CustomerRepository;
 import com.example.springlesson3.interfaces.ProductRepository;
 import com.example.springlesson3.interfaces.ProductService;
 import com.example.springlesson3.repository.specification.ProductSearchSpecification;
@@ -78,18 +77,18 @@ public class ProductServiceImp implements ProductService {
     @Override
     public Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable) {
         // проверка кривых рук
-        if(maxCost==null){//если мин макс перепутано меняем местамии
+        if (maxCost == null) {//если мин макс перепутано меняем местамии
             maxCost = Integer.MAX_VALUE;
 
         }
-        if(minCost==null){//если мин макс перепутано меняем местамии
+        if (minCost == null) {//если мин макс перепутано меняем местамии
             minCost = 0;
 
         }
-        if(minCost>maxCost){//если мин макс перепутано , меняем местамии
-            maxCost = minCost+maxCost;
-            minCost =maxCost-minCost;
-            maxCost= maxCost-minCost;
+        if (minCost > maxCost) {//если мин макс перепутано , меняем местамии
+            maxCost = minCost + maxCost;
+            minCost = maxCost - minCost;
+            maxCost = maxCost - minCost;
         }
 
 

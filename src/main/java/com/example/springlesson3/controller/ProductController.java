@@ -65,7 +65,7 @@ public class ProductController {
 
         if (!validationSet.isEmpty()) { //если есть хоть одна ошибка
             //набор ошибок
-            String errors = validationSet.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("/n"));
+            String errors = validationSet.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("\n"));
             //передаем ошибки валидатора как атрибут ответа (на ридерект)
             attributes.addFlashAttribute("errors", errors);
 
