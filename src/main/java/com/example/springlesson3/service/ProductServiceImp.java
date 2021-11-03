@@ -22,7 +22,7 @@ import java.nio.file.Path;
 public class ProductServiceImp implements ProductService {
 
     private final ProductRepository productRepository;
-    private final CustomerRepository customerDAO;
+
 
     @Override
     public Page<Product> getProducts() {

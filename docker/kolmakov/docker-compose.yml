@@ -13,7 +13,7 @@ services:
         source: simple-app-test-postgres
         target: /var/lib/postgresql/dataConfig
     environment:
-      POSTGRES_DB: simple-app-test
+      POSTGRES_DB: GB_shop
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
     ports:

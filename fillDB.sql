@@ -49,7 +49,7 @@ CREATE TABLE categories
     nameCategory VARCHAR(255) not null unique,
     pathUrl      VARCHAR(255)
 );
-INSERT INTO categories (category_id, nameCategory, pathUrl)
+INSERT INTO categories (category_id, name_category, path_url)
 VALUES (1, 'Catregory1', '1'),
        (2, 'Catregory2', '2'),
        (3, 'Catregory3', '3'),

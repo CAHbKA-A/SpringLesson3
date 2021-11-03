@@ -3,6 +3,7 @@ package com.example.springlesson3.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -22,6 +23,7 @@ public class Customer {
 
     @Column(name = "customer_name")
     @NonNull
+    @NotBlank(message = "Название обязательно")
     private String customerName;
 
     @Column(name = "customer_balance")

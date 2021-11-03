@@ -274,10 +274,10 @@ ALTER TABLE ONLY public.products ALTER COLUMN id_product SET DEFAULT nextval('pu
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (1, 'Catregory1', '1');
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (2, 'Catregory2', '2');
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (3, 'Catregory3', '3');
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (4, 'Catregory4', '4');
+INSERT INTO public.categories (category_id, name_category, path_url) VALUES (1, 'Catregory1', '1');
+INSERT INTO public.categories (category_id, name_category, path_url) VALUES (2, 'Catregory2', '2');
+INSERT INTO public.categories (category_id, name_category, path_url) VALUES (3, 'Catregory3', '3');
+INSERT INTO public.categories (category_id, name_category, path_url) VALUES (4, 'Catregory4', '4');
 
 
 --
@@ -374,7 +374,7 @@ SELECT pg_catalog.setval('public.products_id_product_seq', 1, false);
 --
 
 ALTER TABLE ONLY public.categories
-    ADD CONSTRAINT categories_namecategory_key UNIQUE (namecategory);
+    ADD CONSTRAINT categories_namecategory_key UNIQUE (name_category);
 
 
 --
