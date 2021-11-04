@@ -1,6 +1,7 @@
 package com.example.springlesson3.controller;
 
 import com.example.springlesson3.domain.Product;
+import com.example.springlesson3.interfaces.CategoryService;
 import com.example.springlesson3.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,17 +12,75 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping
+@RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
+    private final Validator validator;
+
+    @GetMapping
+    public String getProducts(Model model) {
+        model.addAttribute("products", productService.getProducts().getContent());
+        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
+        model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
+        model.addAttribute("categoryTree", categoryService.getCategoryTree());
+
+        return "product/productList";
+
+    }
+
+    @GetMapping("/form")
+    public String getProductForm(Model model,
+                                 @RequestParam(required = false) Integer id,
+                                 @ModelAttribute(value = "errors") String errors) {
+        Product product = new Product();
+        if (id != null) {//если продукт есть
+
+            product = productService.getProductById(id);
+
+        }
+        model.addAttribute("product", product);
+        System.out.println(categoryService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
+
+        return "product/form";
+    }
 
 
-    @GetMapping("/search")
+    @PostMapping()
+    public RedirectView Submit(@ModelAttribute Product addProduct,
+                               @RequestParam(required = false) MultipartFile img,
+                               RedirectAttributes attributes) {
+        System.out.println(addProduct);
+        //проверили на ошибки
+        Set<ConstraintViolation<Product>> validationSet = validator.validate(addProduct);
+
+        if (!validationSet.isEmpty()) { //если есть хоть одна ошибка
+            //набор ошибок
+            String errors = validationSet.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("\n"));
+            //передаем ошибки валидатора как атрибут ответа (на ридерект)
+            attributes.addFlashAttribute("errors", errors);
+
+
+            return new RedirectView("/product/form");
+        }
+        productService.addProductWithImg(addProduct, img);
+        return new RedirectView("/product");//
+    }
+
+
+    @GetMapping("search")
     public String SearchProducts(Model model,
                                  @RequestParam(value = "minCost", required = false) Integer minCost,
                                  @RequestParam(value = "maxCost", required = false) Integer maxCost) {
@@ -34,28 +93,6 @@ public class ProductController {
         //тут какой то косяк Page 1 of 1 containing com.example.springlesson3.domain.Product instances а пишет 9
         model.addAttribute("totalPage", page.getPageable().getPageSize());
         return "product/productList";
-    }
-
-    // не смог через кондишн/ попробую чуть позже
-// @PostMapping("/product/**") //
-//    public String productSearch(Model model,@ModelAttribute Product editProduct,
-//                                      @RequestParam(required = false) int minCost,
-//                                      @RequestParam(required = false) int maxCost) {
-//
-//         System.out.println(maxCost+"  "+minCost);
-//        model.addAttribute("products", getProductByCondition(@RequestBody ProductSearchCondition searchCondition);
-//   //     model.addAttribute("products", productService.getProductById(id));
-//        return ("product/productList");
-//    }
-
-    @GetMapping("/product")
-    public String getProducts(Model model) {
-        model.addAttribute("products", productService.getProducts().getContent());
-        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
-        model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
-
-        return "product/productList";
-
     }
 
 
@@ -74,30 +111,6 @@ public class ProductController {
         return "product/addProduct";
     }
 
-    @PostMapping("/addProduct")
-    public RedirectView addSubmit(@ModelAttribute Product addProduct, @RequestParam(required = false) MultipartFile
-            img) {
-        //   System.out.println(addProduct);
-        productService.addProductWithImg(addProduct, img);
-
-        return new RedirectView("/product");// перенаправляем на гет
-    }
-
-    @GetMapping("/editProduct/{id}") //получаем форму
-    public String editForm(Model model, @PathVariable("id") int id) {
-        model.addAttribute("editProduct", productService.getProductById(id));
-        return "product/editProduct";
-    }
-
-
-    @PostMapping("/editProduct/**") //проверяем и едактируем
-    public RedirectView editSubmit(@ModelAttribute Product
-                                           editProduct, @RequestParam(required = false) MultipartFile img) {
-        // System.out.println(editProduct);
-        productService.editProduct(editProduct);
-        return new RedirectView("/product");// перенаправляем на гет
-    }
-
 
     @GetMapping("/deleteProduct/{id}") //получаем форму
     public String deleteProductQuery(Model model, @PathVariable("id") int id) {
@@ -106,6 +119,20 @@ public class ProductController {
         return ("/product/ok");
 
     }
+
+
+//    @GetMapping("/cat")
+//    public String findProductByCategoryAlias(Model model,
+//
+//     @RequestParam(value = "category", required = false) Integer cat) {
+//        System.out.println("!");
+//        model.addAttribute("products", productService.findAllByCategories(cat));
+//            model.addAttribute("currentPage", 1);
+//          model.addAttribute("totalPage", 1);
+//        return ("product/productList");
+//    }
+
+
 
 
 }

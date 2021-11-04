@@ -2,9 +2,12 @@ package com.example.springlesson3.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.xml.transform.Source;
+import java.util.HashSet;
 import java.util.Set;
 
 /*класс хранит только состояние и ни какой бизнеслогики*/
@@ -16,20 +19,22 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Source {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
-    private int id;
+    private Integer id;
 
     @Column(name = "title_product")
     @NonNull
-  //  @NaturalId
+    @NotBlank(message = "Название обязательно")
+    //  @NaturalId
     private String title;
 
     @Column(name = "cost_product")
-    @NonNull
-    private int cost;
+    @NotNull(message = "Цена обязательна")
+
+    private Integer cost;
 
     @Column(name = "description_product")
     @NonNull
@@ -48,7 +53,8 @@ public class Product {
             joinColumns = @JoinColumn(name = "id_product"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories;
+    @ToString.Exclude// что это?
+    private Set<Category> categories = new HashSet<>();
 
 
     @JsonIgnore
@@ -59,6 +65,17 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> orders;
+
+
+    @Override
+    public void setSystemId(String systemId) {
+
+    }
+
+    @Override
+    public String getSystemId() {
+        return null;
+    }
 
 
 }
