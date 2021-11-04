@@ -37,8 +37,7 @@ public class ProductController {
     ) {
         List<Product> productList;
         if (category_URl != null) {
-            List<Category> list = categoryService.findByPathUrl(category_URl);
-            productList = list.get(0).getProducts();
+            productList = categoryService.findByPathUrl(category_URl);
 
         } else {
             productList = productService.getProducts().getContent();
@@ -128,11 +127,6 @@ public class ProductController {
     }
 
 
-    @GetMapping("/addProduct") //получаем форму
-    public String addForm(Model model) {
-        model.addAttribute("addProduct", new Product());
-        return "product/addProduct";
-    }
 
 
     @GetMapping("/deleteProduct/{id}") //получаем форму
