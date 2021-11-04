@@ -34,6 +34,7 @@ public class ProductController {
         model.addAttribute("products", productService.getProducts().getContent());
         model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
         model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
+        model.addAttribute("categoryTree", categoryService.getCategoryTree());
 
         return "product/productList";
 
@@ -50,7 +51,9 @@ public class ProductController {
 
         }
         model.addAttribute("product", product);
+        System.out.println(categoryService.findAll());
         model.addAttribute("categories", categoryService.findAll());
+
         return "product/form";
     }
 
@@ -116,6 +119,20 @@ public class ProductController {
         return ("/product/ok");
 
     }
+
+
+//    @GetMapping("/cat")
+//    public String findProductByCategoryAlias(Model model,
+//
+//     @RequestParam(value = "category", required = false) Integer cat) {
+//        System.out.println("!");
+//        model.addAttribute("products", productService.findAllByCategories(cat));
+//            model.addAttribute("currentPage", 1);
+//          model.addAttribute("totalPage", 1);
+//        return ("product/productList");
+//    }
+
+
 
 
 }

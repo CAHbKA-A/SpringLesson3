@@ -26,7 +26,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     //то же смаое
 //    List<Product> findAllByCostBetweenMinAndMax(int minCost, int maxCost);
+
+
     //List<Product> findAllByCategories_nameCategory(String name); //_ = join
+
 
 }
 

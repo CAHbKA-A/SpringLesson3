@@ -8,11 +8,11 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{fragment/header::header}">Header</div>
+    <div th:replace="~{Parts/header::header}">Header</div>
 
     <h1 th:text="${category.id} == null ? 'Добавление категории' : 'Редактирование категории'">Добавление/Редактирование категории</h1>
 
-    <div th:replace="~{fragment/violations::violations}"></div>
+<!--    <div th:replace="~{Parts/violations::violations}"></div>-->
 
     <form action="#" th:action="@{/category}" th:object="${category}" method="post">
         <div class="form-group">
@@ -21,22 +21,22 @@
 
         <div class="mb-3">
             <label for="title" class="form-label">Наименование категории</label>
-            <input th:field="*{name}" id="title" type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Укажите наименование">
+            <input th:field="*{nameCategory}" id="title" type="text" class="form-control"   placeholder="Укажите наименование">
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Алиас категории</label>
-            <input th:field="*{alias}" id="price" type="text" step="0.01" class="form-control" aria-describedby="emailHelp" placeholder="Укажите алиас" >
+            <input th:field="*{pathUrl}" id="price" type="text"  class="form-control"  placeholder="Укажите алиас" >
         </div>
 
         <div class="mb-3">
             <label for="categories" class="form-label">Родительская категория</label>
-            <select id="categories" class="form-select" th:field="*{parentId}">
+            <select id="categories" class="form-select" th:field="*{parentCategory}">
                 <option value="">Без родителя</option>
                 <option th:each="c : ${categories}"
                         th:value="${{c}}"
                         th:text="${c.nameCategory}"
                         th:if="${!c.equals(category)}"
-                        th:selected="${c.equals(category.parentId)}"
+                        th:selected="${c.equals(category.parentCategory)}"
                 >
                     Category
                 </option>

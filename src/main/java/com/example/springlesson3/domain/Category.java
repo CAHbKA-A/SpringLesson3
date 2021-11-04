@@ -6,15 +6,15 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
 @Builder
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
+
 
 @Entity
 @Table(name = "categories")
@@ -33,16 +33,32 @@ public class Category {
     @NotBlank(message = "Путь(Alias) обязательный")
     private String pathUrl;
 
-    @Column(name = "parent_id")
-    private int parentId ;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parentCategory;
 
-    @ManyToMany(mappedBy = "categories")
-    private Set<Product> products = new HashSet<>();
+//    @ManyToMany(mappedBy = "categories")
+//    //private Set<Product> products = new HashSet<>();
+//    private List<Product> products = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "parentId")
+    @OneToMany(mappedBy = "parentCategory")
     @ToString.Exclude
     private Set<Category> subCategories;
+
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+
+    @ToString.Exclude
+    private Set<Product> products;
+
 
     @Override
     public boolean equals(Object o) {
