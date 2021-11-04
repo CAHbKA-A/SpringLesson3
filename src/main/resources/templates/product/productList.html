@@ -19,8 +19,8 @@
     <div th:replace="~{Parts/header::header}"></div>
 
     <h1>список продуктов </h1>
-    <!--    <p th:text="${'Страница '+ currentPage+ ' из '+page.getPageSize()}"> </p>-->
-    <p th:text="${'Страница '+ currentPage+ ' из '+totalPage}"></p>
+<!--    <p th:text="${'Страница '+ currentPage+ ' из '+page.getPageSize()}"> </p>-->
+    <p th:text="${'Страница '+ currentPage+ ' из '+totalPage}"> </p>
 
     <div class="border me-5">
         <div th:replace="~{Parts/category-tree::categoryTree(treeEntries=${categoryTree.rootCategories})}"></div>
@@ -30,8 +30,8 @@
         <div class="row rows-cols-auto mt-5 mb-5">
 
             <div th:each="product :${products}" class="card  me-2 mb-2 " style="width: 18rem;">
-                <img th:src="${product.imgLink}" class="card-img-top" alt="...">
-                <!--                <img th:src="@{${product.imgLink}}"             class="card-img-top" alt="...">-->
+                <img th:src="${product.imgLink}"                class="card-img-top" alt="...">
+<!--                <img th:src="@{${product.imgLink}}"             class="card-img-top" alt="...">-->
 
                 <div class="card-body">
                     <h2 th:text="${product.title}" class="card-title">Card</h2>
@@ -41,7 +41,7 @@
                     <a th:href="${'http://localhost:8080/productOverview/'+product.id}" class="btn btn-primary">Подробнее</a>
                     <a href="#" class="btn btn-primary">В корзину</a> </br>
 
-                    <!--                  Кнопка будет скрываться если не хватает прав-->
+<!--                  Кнопка будет скрываться если не хватает прав-->
                     <a th:href="@{/product/form(id=${product.id})}" href="#" class="btn btn-primary">edit</a>
                     <a th:href="${'/product/deleteProduct/'+product.id}" class="btn btn-primary">delete</a>
 
