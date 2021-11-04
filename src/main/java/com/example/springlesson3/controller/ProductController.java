@@ -18,7 +18,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,12 +35,10 @@ public class ProductController {
     public String getProducts(Model model,
                               @RequestParam(value = "category", required = false) String category_URl
     ) {
-        List<Product> productList = new ArrayList<>();
+        List<Product> productList;
         if (category_URl != null) {
             List<Category> list = categoryService.findByPathUrl(category_URl);
-            for (Category category : list) {
-                productList = category.getProducts();
-            }
+            productList = list.get(0).getProducts();
 
         } else {
             productList = productService.getProducts().getContent();
