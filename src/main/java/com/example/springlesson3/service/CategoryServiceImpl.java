@@ -31,6 +31,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void save(Category category) {
+
+        System.out.println("S A V E " + category);
         categoryRepository.save(category);
     }
 

@@ -1,5 +1,6 @@
 package com.example.springlesson3.controller;
 
+import com.example.springlesson3.domain.Category;
 import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.CategoryService;
 import com.example.springlesson3.interfaces.ProductService;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,7 +45,7 @@ public class ProductController {
 
     @GetMapping("/form")
     public String getProductForm(Model model,
-                                 @RequestParam(required = false) Integer id,
+                                 @RequestParam(required = false) Long id,
                                  @ModelAttribute(value = "errors") String errors) {
         Product product = new Product();
         if (id != null) {//если продукт есть
@@ -50,9 +53,19 @@ public class ProductController {
             product = productService.getProductById(id);
 
         }
+        List<Category> categorySet= categoryService.findAll();
+        for (Category category : categorySet) {
+            System.out.println(category.getNameCategory()   );
+        }
+        Set<Category> prodSet= product.getCategories();
+        for (Category category : prodSet) {
+            System.out.println(category.getNameCategory()   );
+        }
+//
+//        System.out.println("!!!!!!"+product.getCategories());
+//        System.out.println("!!!!!!"+categorySet);
         model.addAttribute("product", product);
-        System.out.println(categoryService.findAll());
-        model.addAttribute("categories", categoryService.findAll());
+         model.addAttribute("categories", categorySet);
 
         return "product/form";
     }
@@ -97,7 +110,7 @@ public class ProductController {
 
 
     @GetMapping("/product/{id}") //получаем форму
-    public String findProductById(Model model, @PathVariable("id") int id) {
+    public String findProductById(Model model, @PathVariable("id") Long id) {
         model.addAttribute("products", productService.getProductById(id));
         model.addAttribute("currentPage", 1);
         model.addAttribute("totalPage", 1);
@@ -113,7 +126,7 @@ public class ProductController {
 
 
     @GetMapping("/deleteProduct/{id}") //получаем форму
-    public String deleteProductQuery(Model model, @PathVariable("id") int id) {
+    public String deleteProductQuery(Model model, @PathVariable("id") Long id) {
         productService.deleteProduct(id);
 
         return ("/product/ok");

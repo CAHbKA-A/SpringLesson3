@@ -44,17 +44,15 @@
             <label for="description" class="form-label">Описалово</label>
             <input th:field="*{description}" id="description" type="text" class="form-control"
                    placeholder="Опишите товар">
-
-
         </div>
+
 
         <div class="mb-3">
             <label for="categories" class="form-label">Категории</label>
-            <!--            *{categories} из обьекта product-->
-            <!--            ${categories} из модели-->
             <select id="categories" class="form-select" th:field="*{categories}" multiple>
                 <option th:each="category : ${categories}"
-                        th:selected="${#lists.contains(product.categories, category)}"
+                        th:selected="${#lists.contains(product.getCategories(), category)}"
+
                         th:value="${{category}}"
                         th:text="${category.nameCategory}"
                 >

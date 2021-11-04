@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
+public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
     //JPQL  @Query("select p from Product  p where p.title =:title") или
     //SQL     @Query (nativeQuery = true,value = "select * from Product p where p.title = :title") или

@@ -19,8 +19,11 @@ import java.util.*;
 @Entity
 @Table(name = "categories")
 public class Category {
+
+
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
 
@@ -57,7 +60,7 @@ public class Category {
     )
 
     @ToString.Exclude
-    private Set<Product> products;
+    private Set<Product> products= new HashSet<>();
 
 
     @Override
@@ -72,4 +75,5 @@ public class Category {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }
