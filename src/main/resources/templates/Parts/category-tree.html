@@ -5,18 +5,18 @@
     <ul>
         <li th:each="treeEntry : ${treeEntries}">
             <div class="flex">
-                <a th:href="@{/product/list(category=${treeEntry.category.pathUrl})}"
+                <a th:href="@{/product(category=${treeEntry.category.pathUrl})}"
                    th:text="${treeEntry.category.nameCategory}"
                 >
-                    Наименование категории
+                    filter
                 </a>
 
                 <a th:href="@{/category/form(id=${treeEntry.category.id})}" class="ms-1 link-secondary">
-                    <small>| Редактировать</small>
+                   edit
                 </a>
             </div>
 
-<!--            <div th:replace="~{fragment/category-tree::categoryTree(treeEntries=${treeEntry.subCategories})}"></div>-->
+            <div th:replace="~{Parts/category-tree::categoryTree(treeEntries=${treeEntry.subCategories})}"></div>
         </li>
     </ul>
 </div>
