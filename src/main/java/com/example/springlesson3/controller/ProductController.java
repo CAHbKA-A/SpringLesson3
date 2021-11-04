@@ -38,7 +38,7 @@ public class ProductController {
         model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
         model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
         model.addAttribute("categoryTree", categoryService.getCategoryTree());
-
+       // System.out.println("!"+categoryService.getCategoryTree());
         return "product/productList";
 
     }
