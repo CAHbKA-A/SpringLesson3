@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
+import java.util.List;
 
 @Service
 
@@ -94,4 +95,9 @@ public class ProductServiceImp implements ProductService {
 
         return productRepository.findAllByCostLessThanEqualAndCostGreaterThanEqual(maxCost, minCost, pageable);
     }
+
+//    @Override
+//    public List<Product> findAllByCategories(int id) {
+//       return productRepository.findAllByCategoriesEquals(id);
+//    }
 }

@@ -2,6 +2,7 @@ package com.example.springlesson3.service;
 
 import com.example.springlesson3.domain.Category;
 import com.example.springlesson3.domain.CategoryTree;
+import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.CategoryRepository;
 import com.example.springlesson3.interfaces.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +36,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryTree getCategoryTree() {
-        Set<Category> categories = categoryRepository.findAllByParentIdIsNull();
+        Set<Category> categories = categoryRepository.findAllByParentCategoryIsNull();
         List<CategoryTree.TreeEntry> rootEntries = convertToTreeEntries(categories);
 
         return CategoryTree.builder()
                 .rootCategories(rootEntries)
                 .build();
     }
+
+//    @Override
+//    public List<Product> findProductsByByCategoriesEquals(Integer cat) {
+//        return categoryRepository.findProductsByByCategoriesEquals(cat);
+//    }
 
     private List<CategoryTree.TreeEntry> convertToTreeEntries(Set<Category> rootCategories) {
         if (CollectionUtils.isEmpty(rootCategories)) return Collections.emptyList();
@@ -54,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryTree.TreeEntry convertToTreeEntry(Category category) {
         return CategoryTree.TreeEntry.builder()
                 .category(category)
-            //    .subCategories(convertToTreeEntries(category.getSubCategories()))
+                .subCategories(convertToTreeEntries(category.getSubCategories()))
                 .build();
     }
 

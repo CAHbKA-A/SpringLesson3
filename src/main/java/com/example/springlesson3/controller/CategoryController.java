@@ -2,6 +2,7 @@ package com.example.springlesson3.controller;
 
 import com.example.springlesson3.domain.Category;
 import com.example.springlesson3.interfaces.CategoryService;
+import com.example.springlesson3.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ public class CategoryController {
         Category category = new Category();
         if (id != null) {
             category = categoryService.findById(id);
+            System.out.println("NEW!!!!!"+category);
         }
 
         model.addAttribute("category", category);
@@ -57,5 +59,16 @@ public class CategoryController {
         return new RedirectView("/product/list");
     }
 
+//    @GetMapping("/cat")
+//    public String findProductByCategoryAlias(Model model,
+//
+//                                             @RequestParam(value = "category", required = false) Integer cat) {
+//        System.out.println("!  "+ categoryService.findProductsByByCategoriesEquals(cat));
+//
+//        model.addAttribute("products", categoryService.findProductsByByCategoriesEquals(cat));
+//        model.addAttribute("currentPage", 1);
+//        model.addAttribute("totalPage", 1);
+//        return ("product/productList");
+//    }
 
 }
