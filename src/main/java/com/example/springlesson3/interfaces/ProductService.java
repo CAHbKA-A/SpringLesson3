@@ -22,6 +22,6 @@ public interface ProductService {
 
     Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable);
 
-
+    List<Product> findAllByCategories_Alias(String alias);
     //List<Product> findAllByCategories(int id);
 }

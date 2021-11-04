@@ -30,6 +30,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
 
     //List<Product> findAllByCategories_nameCategory(String name); //_ = join
 
-
+    List<Product> findAllByCategories_PathUrl(String alias);
 }
 

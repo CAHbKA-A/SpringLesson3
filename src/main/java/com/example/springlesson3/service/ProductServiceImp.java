@@ -96,6 +96,11 @@ public class ProductServiceImp implements ProductService {
         return productRepository.findAllByCostLessThanEqualAndCostGreaterThanEqual(maxCost, minCost, pageable);
     }
 
+    @Override
+    public List<Product> findAllByCategories_Alias(String alias) {
+        return productRepository.findAllByCategories_PathUrl(alias);
+    }
+
 //    @Override
 //    public List<Product> findAllByCategories(int id) {
 //       return productRepository.findAllByCategoriesEquals(id);

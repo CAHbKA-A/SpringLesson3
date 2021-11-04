@@ -2,7 +2,6 @@ package com.example.springlesson3.service;
 
 import com.example.springlesson3.domain.Category;
 import com.example.springlesson3.domain.CategoryTree;
-import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.interfaces.CategoryRepository;
 import com.example.springlesson3.interfaces.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -46,10 +46,12 @@ public class CategoryServiceImpl implements CategoryService {
                 .build();
     }
 
-//    @Override
-//    public List<Product> findProductsByByCategoriesEquals(Integer cat) {
-//        return categoryRepository.findProductsByByCategoriesEquals(cat);
-//    }
+
+    @Override
+    public List<Category> findByPathUrl(String categoryURl) {
+        return categoryRepository.findAllByPathUrlEquals(categoryURl);
+    }
+
 
     private List<CategoryTree.TreeEntry> convertToTreeEntries(Set<Category> rootCategories) {
         if (CollectionUtils.isEmpty(rootCategories)) return Collections.emptyList();

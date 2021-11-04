@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,12 +33,25 @@ public class ProductController {
     private final Validator validator;
 
     @GetMapping
-    public String getProducts(Model model) {
-        model.addAttribute("products", productService.getProducts().getContent());
+    public String getProducts(Model model,
+                              @RequestParam(value = "category", required = false) String category_URl
+    ) {
+        List<Product> productList = new ArrayList<>();
+        if (category_URl != null) {
+            List<Category> list = categoryService.findByPathUrl(category_URl);
+            for (Category category : list) {
+                productList = category.getProducts();
+            }
+
+        } else {
+            productList = productService.getProducts().getContent();
+        }
+
+        model.addAttribute("products", productList);
         model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
         model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
         model.addAttribute("categoryTree", categoryService.getCategoryTree());
-       // System.out.println("!"+categoryService.getCategoryTree());
+
         return "product/productList";
 
     }
@@ -53,19 +66,19 @@ public class ProductController {
             product = productService.getProductById(id);
 
         }
-        List<Category> categorySet= categoryService.findAll();
+        List<Category> categorySet = categoryService.findAll();
         for (Category category : categorySet) {
-            System.out.println(category.getNameCategory()   );
+            System.out.println(category.getNameCategory());
         }
-        Set<Category> prodSet= product.getCategories();
+        Set<Category> prodSet = product.getCategories();
         for (Category category : prodSet) {
-            System.out.println(category.getNameCategory()   );
+            System.out.println(category.getNameCategory());
         }
 //
 //        System.out.println("!!!!!!"+product.getCategories());
 //        System.out.println("!!!!!!"+categorySet);
         model.addAttribute("product", product);
-         model.addAttribute("categories", categorySet);
+        model.addAttribute("categories", categorySet);
 
         return "product/form";
     }
@@ -144,8 +157,6 @@ public class ProductController {
 //          model.addAttribute("totalPage", 1);
 //        return ("product/productList");
 //    }
-
-
 
 
 }
