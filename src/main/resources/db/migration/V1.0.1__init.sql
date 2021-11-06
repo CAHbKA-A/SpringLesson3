@@ -8,38 +8,81 @@ CREATE TABLE products
     title_product       VARCHAR(255),
     cost_product        int,
     description_product VARCHAR(255),
-    categoryId_product  bigint,
+
     imgLink_product     VARCHAR(255)
 );
-INSERT INTO products (id_product, title_product, cost_product, description_product, categoryId_product, imgLink_product)
-VALUES (1, 'product1', 123, 'blahbla2h1', 23, 'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
-       (2, 'product2', 1223, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
-       (3, 'product3', 1223, 'blahblah1', 24, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
-       (4, 'product4', 4123, 'blaheblah1', 23,
+INSERT INTO products (title_product, cost_product, description_product,  imgLink_product)
+VALUES ('product1', 123, 'blahbla2h1',  'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
+       ('product2', 1223, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
+       ('product3', 1223, 'blahblah1',  'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
+       ('product4', 4123, 'blaheblah1',         'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg'),
+       ('pr7oduct5', 1523, 'blaheblah1',  'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg'),
+       ('produc6t1', 123, 'blahbla2h1',  'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
+       ('pro5duct2', 1223, 'blaheblah1',  'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
+       ('prod4uct3', 1223, 'blahblah1',  'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
+       ('produ3ct4', 4123, 'blaheblah1',
         'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg'),
-       (5, 'product5', 1523, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg');
-
-
+       ('prod2uct5', 1523, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg'),
+       ('p4rod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prtbvrod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('cvbprod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('cprod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('vprod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('pbrod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prtbvrod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('cvbprod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('cprod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('vprod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('pbrod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prbod2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('pronmd2uct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
+       ('prod2muct5', 1523, 'blaheblah1',
+        'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
 
 DROP TABLE IF EXISTS categories CASCADE;
 CREATE TABLE categories
 (
-    category_id  bigserial PRIMARY KEY,
-    nameCategory VARCHAR(255) not null unique,
-    pathUrl      VARCHAR(255)
+    category_id  bigserial PRIMARY KEY not null,
+    name_Category VARCHAR(255)          not null unique,
+    path_Url      VARCHAR(255)          not null,
+    parent_id    bigint,
+        foreign key (parent_id) references categories(category_id)
 );
-INSERT INTO categories (category_id, nameCategory, pathUrl)
-VALUES (1, 'Catregory1', '1'),
-       (2, 'Catregory2', '2'),
-       (3, 'Catregory3', '3'),
-       (4, 'Catregory4', '4');
+INSERT INTO categories (category_id, name_Category, path_Url, parent_id)
+VALUES (1, 'Catregory1', '1', 1),
+       (2, 'Catregory2', '2', 1),
+       (3, 'Catregory3', '3', 2),
+       (4, 'Catregory4', '4', 1),
+       (24, 'Catregory24', '24', 1),
+       (23, 'Catregory23', '23', 1);
 
 
 
 DROP TABLE IF EXISTS customers CASCADE;
 create table customers
 (
-    customer_id               serial,
+    customer_id      serial,
     customer_name    varchar(255) not null,
     customer_balance int default 0
 );
@@ -62,13 +105,13 @@ VALUES ('Alex', 0),
 DROP TABLE IF EXISTS orders CASCADE;
 create table orders
 (
-    order_id     serial
+    order_id          serial
         constraint orders_pk
             primary key,
-    order_customer_id  integer,
-    order_total_cost   integer,
-    order_status varchar(255),
-    order_update date
+    order_customer_id integer,
+    order_total_cost  integer,
+    order_status      varchar(255),
+    order_update      date
 );
 
 

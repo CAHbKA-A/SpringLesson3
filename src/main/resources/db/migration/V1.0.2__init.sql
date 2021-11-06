@@ -8,57 +8,56 @@ CREATE TABLE products
     title_product       VARCHAR(255),
     cost_product        int,
     description_product VARCHAR(255),
-    categoryId_product  bigint,
+
     imgLink_product     VARCHAR(255)
 );
-INSERT INTO products (title_product, cost_product, description_product, categoryId_product, imgLink_product)
-VALUES ('product1', 123, 'blahbla2h1', 23, 'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
-       ('product2', 1223, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
-       ('product3', 1223, 'blahblah1', 24, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
-       ('product4', 4123, 'blaheblah1', 23,
+INSERT INTO products (title_product, cost_product, description_product,  imgLink_product)
+VALUES ('product1', 123, 'blahbla2h1',  'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
+       ('product2', 1223, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
+       ('product3', 1223, 'blahblah1',  'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
+       ('product4', 4123, 'blaheblah1',         'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg'),
+       ('pr7oduct5', 1523, 'blaheblah1',  'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg'),
+       ('produc6t1', 123, 'blahbla2h1',  'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
+       ('pro5duct2', 1223, 'blaheblah1',  'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
+       ('prod4uct3', 1223, 'blahblah1',  'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
+       ('produ3ct4', 4123, 'blaheblah1',
         'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg'),
-       ('pr7oduct5', 1523, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg'),
-       ('produc6t1', 123, 'blahbla2h1', 23, 'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg'),
-       ('pro5duct2', 1223, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg'),
-       ('prod4uct3', 1223, 'blahblah1', 24, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg'),
-       ('produ3ct4', 4123, 'blaheblah1', 23,
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg'),
-       ('prod2uct5', 1523, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg'),
-       ('p4rod2uct5', 1523, 'blaheblah1', 23,
+       ('prod2uct5', 1523, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg'),
+       ('p4rod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prod2uct5', 1523, 'blaheblah1', 23,
+       ('prod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prtbvrod2uct5', 1523, 'blaheblah1', 23,
+       ('prtbvrod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prod2uct5', 1523, 'blaheblah1', 23,
+       ('prod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('cvbprod2uct5', 1523, 'blaheblah1', 23,
+       ('cvbprod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('cprod2uct5', 1523, 'blaheblah1', 23,
+       ('cprod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('vprod2uct5', 1523, 'blaheblah1', 23,
+       ('vprod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('pbrod2uct5', 1523, 'blaheblah1', 23,
+       ('pbrod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prod2uct5', 1523, 'blaheblah1', 23,
+       ('prod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prtbvrod2uct5', 1523, 'blaheblah1', 23,
+       ('prtbvrod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prod2uct5', 1523, 'blaheblah1', 23,
+       ('prod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('cvbprod2uct5', 1523, 'blaheblah1', 23,
+       ('cvbprod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('cprod2uct5', 1523, 'blaheblah1', 23,
+       ('cprod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('vprod2uct5', 1523, 'blaheblah1', 23,
+       ('vprod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('pbrod2uct5', 1523, 'blaheblah1', 23,
+       ('pbrod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prbod2uct5', 1523, 'blaheblah1', 23,
+       ('prbod2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('pronmd2uct5', 1523, 'blaheblah1', 23,
+       ('pronmd2uct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg'),
-       ('prod2muct5', 1523, 'blaheblah1', 23,
+       ('prod2muct5', 1523, 'blaheblah1',
         'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
 
 DROP TABLE IF EXISTS categories CASCADE;
@@ -70,15 +69,11 @@ CREATE TABLE categories
     parent_id    bigint,
         foreign key (parent_id) references categories(category_id)
 );
-INSERT INTO categories (category_id, name_Category, path_Url, parent_id)
-VALUES (1, 'Catregory1', '1', 1),
-       (2, 'Catregory2', '2', 1),
-       (3, 'Catregory3', '3', 2),
-       (4, 'Catregory4', '4', 1),
-       (24, 'Catregory24', '24', 1),
-       (23, 'Catregory23', '23', 1);
-
-
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (10, '234', '324', null);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (11, 'y54ygfdgdf', 'gfdgfdg54', null);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (12, 'y5erwdfg', 'gfdgfdgfd', null);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (13, 'Мясо2', '645п', 10);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (14, 'gffbgfng', 'fghtrh46', 10);
 
 DROP TABLE IF EXISTS customers CASCADE;
 create table customers
@@ -157,11 +152,11 @@ create table product_category
 
 
 INSERT INTO product_category (id_product, category_id)
-VALUES (1, 2),
-       (1, 3),
-       (1, 1),
-       (2, 2),
-       (3, 2);
+VALUES (1, 10),
+       (1, 13),
+       (1, 11),
+       (2, 10),
+       (3, 12);
 
 
 
