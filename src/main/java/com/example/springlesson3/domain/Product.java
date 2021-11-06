@@ -7,7 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.transform.Source;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /*класс хранит только состояние и ни какой бизнеслогики*/
@@ -23,7 +25,7 @@ public class Product implements Source {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
-    private Integer id;
+    private Long id;
 
     @Column(name = "title_product")
     @NonNull
@@ -53,7 +55,7 @@ public class Product implements Source {
             joinColumns = @JoinColumn(name = "id_product"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    @ToString.Exclude// что это?
+   @ToString.Exclude
     private Set<Category> categories = new HashSet<>();
 
 

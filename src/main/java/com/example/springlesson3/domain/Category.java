@@ -6,7 +6,10 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,17 +22,19 @@ import java.util.*;
 @Entity
 @Table(name = "categories")
 public class Category {
+
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
 
-    @Column(name ="name_Category")
+    @Column(name = "name_Category")
     @NonNull
     @NotBlank(message = "Название обязательно")
     private String nameCategory;
 
-    @Column(name ="path_Url")
+    @Column(name = "path_Url")
     @NotBlank(message = "Путь(Alias) обязательный")
     private String pathUrl;
 
@@ -53,11 +58,11 @@ public class Category {
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            inverseJoinColumns = @JoinColumn(name = "id_product")
     )
 
     @ToString.Exclude
-    private Set<Product> products;
+    private List<Product> products = new ArrayList<>();
 
 
     @Override
@@ -72,4 +77,5 @@ public class Category {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

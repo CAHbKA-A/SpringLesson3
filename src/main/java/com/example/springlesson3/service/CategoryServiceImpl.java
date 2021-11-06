@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -31,6 +32,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void save(Category category) {
+
+        System.out.println("S A V E " + category);
         categoryRepository.save(category);
     }
 
@@ -44,10 +47,18 @@ public class CategoryServiceImpl implements CategoryService {
                 .build();
     }
 
+
 //    @Override
-//    public List<Product> findProductsByByCategoriesEquals(Integer cat) {
-//        return categoryRepository.findProductsByByCategoriesEquals(cat);
+//    public List<Category> findByPathUrl(String categoryURl) {
+//
+//        return categoryRepository.findAllByPathUrlEquals(categoryURl);
 //    }
+//
+    @Override
+    public List<Product> findByPathUrl(String categoryURl) {
+
+        return categoryRepository.findAllByPathUrlEquals(categoryURl).get(0).getProducts();
+    }
 
     private List<CategoryTree.TreeEntry> convertToTreeEntries(Set<Category> rootCategories) {
         if (CollectionUtils.isEmpty(rootCategories)) return Collections.emptyList();

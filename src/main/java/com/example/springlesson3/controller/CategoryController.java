@@ -6,6 +6,7 @@ import com.example.springlesson3.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.SocketUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -25,13 +26,16 @@ public class CategoryController {
 
     private final Validator validator;
 
+
+
+
     @GetMapping("/form")
     public String getCategoryForm(@RequestParam(required = false) Long id, Model model,
-                                  @ModelAttribute(value = "violations") String violations) {
+                                  @ModelAttribute(value = "errors") String violations) {
         Category category = new Category();
         if (id != null) {
             category = categoryService.findById(id);
-            System.out.println("NEW!!!!!"+category);
+            System.out.println("____"+category);
         }
 
         model.addAttribute("category", category);
@@ -40,6 +44,7 @@ public class CategoryController {
 
         return "category/form";
     }
+
 
     @PostMapping
     public RedirectView saveCategory(Category category, RedirectAttributes attributes) {
@@ -53,10 +58,10 @@ public class CategoryController {
 
             return new RedirectView("/category/form");
         }
-
+        System.out.println("save "+category);
         categoryService.save(category);
 
-        return new RedirectView("/product/list");
+        return new RedirectView("/product");
     }
 
 //    @GetMapping("/cat")

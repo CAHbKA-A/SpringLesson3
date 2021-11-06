@@ -59,12 +59,12 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public Product getProductById(int id) {
+    public Product getProductById(Long id) {
         return productRepository.getById(id);
     }
 
     @Override
-    public void deleteProduct(int id) {
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
 
@@ -94,6 +94,11 @@ public class ProductServiceImp implements ProductService {
 
 
         return productRepository.findAllByCostLessThanEqualAndCostGreaterThanEqual(maxCost, minCost, pageable);
+    }
+
+    @Override
+    public List<Product> findAllByCategories_Alias(String alias) {
+        return productRepository.findAllByCategories_PathUrl(alias);
     }
 
 //    @Override

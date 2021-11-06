@@ -15,5 +15,6 @@ public interface CategoryService {
 
     CategoryTree getCategoryTree();
 
-   // List<Product>  findProductsByByCategoriesEquals(Integer cat);
+
+    List<Product> findByPathUrl(String category_uRl);
 }

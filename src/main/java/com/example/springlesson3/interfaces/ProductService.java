@@ -14,14 +14,14 @@ public interface ProductService {
 
     void addProductWithImg(Product addProduct, MultipartFile img);
 
-    Product getProductById(int id);
+    Product getProductById(Long id);
 
-    void deleteProduct(int id);
+    void deleteProduct(Long id);
 
     Product editProduct(Product product);
 
     Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable);
 
-
+    List<Product> findAllByCategories_Alias(String alias);
     //List<Product> findAllByCategories(int id);
 }
