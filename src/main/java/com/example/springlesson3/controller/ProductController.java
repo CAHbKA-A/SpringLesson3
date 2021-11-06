@@ -33,29 +33,29 @@ public class ProductController {
     private final CategoryService categoryService;
     private final Validator validator;
 
-//    @GetMapping
-//    public String getProducts(Model model,
-//                              @RequestParam(value = "category", required = false) String category_URl
-//    ) {
-//        List<Product> productList;
-//        if (category_URl != null) {
-//            productList = categoryService.findByPathUrl(category_URl);
-//
-//        } else {
-//            productList = productService.getProducts().getContent();
-//        }
-//
-//        model.addAttribute("products", productList);
-//        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
-//        model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
-//        model.addAttribute("categoryTree", categoryService.getCategoryTree());
-//
-//        return "product/productList";
-//
-//    }
+    @GetMapping
+    public String getProducts(Model model,
+                              @RequestParam(value = "category", required = false) String category_URl
+    ) {
+        List<Product> productList;
+        if (category_URl != null) {
+            productList = categoryService.findByPathUrl(category_URl);
+
+        } else {
+            productList = productService.getProducts().getContent();
+        }
+
+        model.addAttribute("products", productList);
+        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
+        model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
+        model.addAttribute("categoryTree", categoryService.getCategoryTree());
+
+        return "product/productList";
+
+    }
 
 
-    @GetMapping("/list")
+    @GetMapping("/list") //c фильтром
     public ModelAndView getProductsList(ProductSearch conditional) {
 
         ModelAndView modelAndView = new ModelAndView("product/productList");
@@ -113,24 +113,24 @@ public class ProductController {
             return new RedirectView("/product/form");
         }
         productService.addProductWithImg(addProduct, img);
-        return new RedirectView("/product");//
+        return new RedirectView("/product/list");//
     }
 
 
-    @GetMapping("search")
-    public String SearchProducts(Model model,
-                                 @RequestParam(value = "minCost", required = false) Integer minCost,
-                                 @RequestParam(value = "maxCost", required = false) Integer maxCost) {
-        //  System.out.println(minCost + "  " + maxCost);
-        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
-        Page<Product> page = productService.findAllByCostLessThanEqualAndCostGreaterThanEqual(minCost, maxCost, pageable);
-        System.out.println(page);
-        model.addAttribute("products", page.getContent());
-        model.addAttribute("currentPage", page.getPageable().getPageNumber() + 1);
-        //тут какой то косяк Page 1 of 1 containing com.example.springlesson3.domain.Product instances а пишет 9
-        model.addAttribute("totalPage", page.getPageable().getPageSize());
-        return "product/productList";
-    }
+//    @GetMapping("search")
+//    public String SearchProducts(Model model,
+//                                 @RequestParam(value = "minCost", required = false) Integer minCost,
+//                                 @RequestParam(value = "maxCost", required = false) Integer maxCost) {
+//        //  System.out.println(minCost + "  " + maxCost);
+//        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
+//        Page<Product> page = productService.findAllByCostLessThanEqualAndCostGreaterThanEqual(minCost, maxCost, pageable);
+//        System.out.println(page);
+//        model.addAttribute("products", page.getContent());
+//        model.addAttribute("currentPage", page.getPageable().getPageNumber() + 1);
+//        //тут какой то косяк Page 1 of 1 containing com.example.springlesson3.domain.Product instances а пишет 9
+//        model.addAttribute("totalPage", page.getPageable().getPageSize());
+//        return "product/productList";
+//    }
 
 
     @GetMapping("/product/{id}") //получаем форму
