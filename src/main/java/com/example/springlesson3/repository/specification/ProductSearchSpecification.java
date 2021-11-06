@@ -25,6 +25,23 @@ public class ProductSearchSpecification implements Specification<Product> {
         List<Predicate> predicateList = new ArrayList<>(); //сваливаем все передикаты сюда (все что после select ..where
 
 
+        addMinMaxPredicate(root, criteriaBuilder, predicateList);
+        addIdsPredicate(root, predicateList);
+        addTitlePredicate(root, criteriaBuilder, predicateList);
+
+
+        //передаем все предикеты
+
+        return criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
+    }
+
+    private void addIdsPredicate(Root<Product> root, List<Predicate> predicateList) {
+        if (condition.getIdProductList() != null) {
+            predicateList.add(root.get("id").in(condition.getIdProductList()));
+        }
+    }
+
+    private void addMinMaxPredicate(Root<Product> root, CriteriaBuilder criteriaBuilder, List<Predicate> predicateList) {
         if (condition.getMaxCost() != null || condition.getMinCost() != null) {
 
             Predicate predicate = null;
@@ -37,19 +54,13 @@ public class ProductSearchSpecification implements Specification<Product> {
 
             }
         }
-        if (condition.getIdProductList() != null) {
-            predicateList.add(root.get("id").in(condition.getIdProductList()));
-        }
+    }
 
+    private void addTitlePredicate(Root<Product> root, CriteriaBuilder criteriaBuilder, List<Predicate> predicateList) {
         if (condition.getTitle() != null) {
 
             predicateList.add(criteriaBuilder.equal(root.get("title"), condition.getTitle()));
         }
-
-
-        //передаем все предикеты
-
-        return criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
     }
 
 

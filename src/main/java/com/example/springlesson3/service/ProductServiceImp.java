@@ -1,6 +1,7 @@
 package com.example.springlesson3.service;
 
 import com.example.springlesson3.domain.Product;
+import com.example.springlesson3.domain.ProductSearch;
 import com.example.springlesson3.interfaces.ProductRepository;
 import com.example.springlesson3.interfaces.ProductService;
 import com.example.springlesson3.repository.specification.ProductSearchSpecification;
@@ -33,13 +34,13 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public Page<Product> SearchProducts() {
+    public Page<Product> getProductsByConditional(ProductSearch conditional) {
         //постранично
-        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
-        ProductSearchSpecification productSearchSpecification = new ProductSearchSpecification(null);
+        Pageable pageable = PageRequest.of(conditional.getPageIndex(), conditional.getSize());
+        ProductSearchSpecification productSearchSpecification = new ProductSearchSpecification(conditional);
         productRepository.findAll(productSearchSpecification);
 
-        return productRepository.findAll(pageable);
+        return productRepository.findAll( productSearchSpecification, pageable);
 
     }
 

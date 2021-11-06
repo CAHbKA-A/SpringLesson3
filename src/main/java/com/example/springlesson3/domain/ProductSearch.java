@@ -14,8 +14,10 @@ import java.util.List;
 public class ProductSearch {
 
     //поля по кот можем искать
+    private int pageIndex;
+    private int size = 10;
     private String title;
-    private Integer minCost;
+    private Integer minCost ;
     private Integer maxCost;
     private List<Integer> idProductList;
 }

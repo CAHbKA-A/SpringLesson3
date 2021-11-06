@@ -2,6 +2,7 @@ package com.example.springlesson3.controller;
 
 import com.example.springlesson3.domain.Category;
 import com.example.springlesson3.domain.Product;
+import com.example.springlesson3.domain.ProductSearch;
 import com.example.springlesson3.interfaces.CategoryService;
 import com.example.springlesson3.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -31,26 +33,39 @@ public class ProductController {
     private final CategoryService categoryService;
     private final Validator validator;
 
-    @GetMapping
-    public String getProducts(Model model,
-                              @RequestParam(value = "category", required = false) String category_URl
-    ) {
-        List<Product> productList;
-        if (category_URl != null) {
-            productList = categoryService.findByPathUrl(category_URl);
+//    @GetMapping
+//    public String getProducts(Model model,
+//                              @RequestParam(value = "category", required = false) String category_URl
+//    ) {
+//        List<Product> productList;
+//        if (category_URl != null) {
+//            productList = categoryService.findByPathUrl(category_URl);
+//
+//        } else {
+//            productList = productService.getProducts().getContent();
+//        }
+//
+//        model.addAttribute("products", productList);
+//        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
+//        model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
+//        model.addAttribute("categoryTree", categoryService.getCategoryTree());
+//
+//        return "product/productList";
+//
+//    }
 
-        } else {
-            productList = productService.getProducts().getContent();
-        }
 
-        model.addAttribute("products", productList);
-        model.addAttribute("currentPage", productService.getProducts().getPageable().getPageNumber() + 1);
-        model.addAttribute("totalPage", productService.getProducts().getPageable().getPageSize());
-        model.addAttribute("categoryTree", categoryService.getCategoryTree());
+    @GetMapping("/list")
+    public ModelAndView getProductsList(ProductSearch conditional) {
 
-        return "product/productList";
+        ModelAndView modelAndView = new ModelAndView("product/productList");
+        modelAndView.addObject("products", productService.getProductsByConditional(conditional));
+        modelAndView.addObject("categoryTree", categoryService.getCategoryTree());
+
+        return modelAndView;
 
     }
+
 
     @GetMapping("/form")
     public String getProductForm(Model model,
@@ -125,8 +140,6 @@ public class ProductController {
         model.addAttribute("totalPage", 1);
         return ("product/productList");
     }
-
-
 
 
     @GetMapping("/deleteProduct/{id}") //получаем форму
