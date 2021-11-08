@@ -56,8 +56,9 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.categories (
     category_id bigint NOT NULL,
-    namecategory character varying(255) NOT NULL,
-    pathurl character varying(255)
+    name_category character varying(255) NOT NULL,
+    path_url character varying(255) NOT NULL,
+    parent_id bigint
 );
 
 
@@ -140,20 +141,6 @@ CREATE TABLE public.flyway_schema_history (
 ALTER TABLE public.flyway_schema_history OWNER TO postgres;
 
 --
--- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.hibernate_sequence
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.hibernate_sequence OWNER TO postgres;
-
---
 -- Name: orders; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -162,7 +149,8 @@ CREATE TABLE public.orders (
     order_customer_id integer,
     order_total_cost integer,
     order_status character varying(255),
-    order_update date
+    order_update date,
+    order_create date
 );
 
 
@@ -225,7 +213,6 @@ CREATE TABLE public.products (
     title_product character varying(255),
     cost_product integer,
     description_product character varying(255),
-    categoryid_product bigint,
     imglink_product character varying(255)
 );
 
@@ -285,10 +272,11 @@ ALTER TABLE ONLY public.products ALTER COLUMN id_product SET DEFAULT nextval('pu
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (1, 'Catregory1', '1');
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (2, 'Catregory2', '2');
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (3, 'Catregory3', '3');
-INSERT INTO public.categories (category_id, namecategory, pathurl) VALUES (4, 'Catregory4', '4');
+INSERT INTO public.categories (category_id, name_category, path_url, parent_id) VALUES (10, '234', '324', NULL);
+INSERT INTO public.categories (category_id, name_category, path_url, parent_id) VALUES (11, 'y54ygfdgdf', 'gfdgfdg54', NULL);
+INSERT INTO public.categories (category_id, name_category, path_url, parent_id) VALUES (12, 'y5erwdfg', 'gfdgfdgfd', NULL);
+INSERT INTO public.categories (category_id, name_category, path_url, parent_id) VALUES (13, 'Мясо2', '645п', 10);
+INSERT INTO public.categories (category_id, name_category, path_url, parent_id) VALUES (14, 'gffbgfng', 'fghtrh46', 10);
 
 
 --
@@ -305,17 +293,17 @@ INSERT INTO public.customers (customer_id, customer_name, customer_balance) VALU
 -- Data for Name: flyway_schema_history; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) VALUES (1, '1', 'init', 'SQL', 'V1__init.sql', 0, 'postgres', '2021-10-29 00:06:24.162578', 4, true);
-INSERT INTO public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) VALUES (2, '2', '1init', 'SQL', 'V2__1init.sql', -1543225546, 'postgres', '2021-10-29 00:18:12.173645', 603, true);
+INSERT INTO public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) VALUES (1, '1.0.1', 'init', 'SQL', 'V1.0.1__init.sql', -61362389, 'postgres', '2021-11-07 02:13:36.56535', 476, true);
+INSERT INTO public.flyway_schema_history (installed_rank, version, description, type, script, checksum, installed_by, installed_on, execution_time, success) VALUES (2, '1.0.2', 'init', 'SQL', 'V1.0.2__init.sql', -1178891113, 'postgres', '2021-11-07 02:13:37.082392', 480, true);
 
 
 --
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.orders (order_id, order_customer_id, order_total_cost, order_status, order_update) VALUES (1, 1, 123, 'added', '2021-10-27');
-INSERT INTO public.orders (order_id, order_customer_id, order_total_cost, order_status, order_update) VALUES (2, 2, 24324, 'added', '2021-10-26');
-INSERT INTO public.orders (order_id, order_customer_id, order_total_cost, order_status, order_update) VALUES (3, 3, 24544, 'added', '2021-10-28');
+INSERT INTO public.orders (order_id, order_customer_id, order_total_cost, order_status, order_update, order_create) VALUES (1, 1, 123, 'added', '2021-10-27', NULL);
+INSERT INTO public.orders (order_id, order_customer_id, order_total_cost, order_status, order_update, order_create) VALUES (2, 2, 24324, 'added', '2021-10-26', NULL);
+INSERT INTO public.orders (order_id, order_customer_id, order_total_cost, order_status, order_update, order_create) VALUES (3, 3, 24544, 'added', '2021-10-28', NULL);
 
 
 --
@@ -335,22 +323,63 @@ INSERT INTO public.orders_products (order_id, product_id, cost, count) VALUES (2
 -- Data for Name: product_category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.product_category (id_product, category_id) VALUES (1, 2);
-INSERT INTO public.product_category (id_product, category_id) VALUES (1, 3);
-INSERT INTO public.product_category (id_product, category_id) VALUES (1, 1);
-INSERT INTO public.product_category (id_product, category_id) VALUES (2, 2);
-INSERT INTO public.product_category (id_product, category_id) VALUES (3, 2);
+INSERT INTO public.product_category (id_product, category_id) VALUES (1, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (1, 13);
+INSERT INTO public.product_category (id_product, category_id) VALUES (1, 11);
+INSERT INTO public.product_category (id_product, category_id) VALUES (2, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (2, 13);
+INSERT INTO public.product_category (id_product, category_id) VALUES (4, 11);
+INSERT INTO public.product_category (id_product, category_id) VALUES (5, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (6, 13);
+INSERT INTO public.product_category (id_product, category_id) VALUES (7, 11);
+INSERT INTO public.product_category (id_product, category_id) VALUES (8, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (9, 13);
+INSERT INTO public.product_category (id_product, category_id) VALUES (10, 11);
+INSERT INTO public.product_category (id_product, category_id) VALUES (11, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (12, 13);
+INSERT INTO public.product_category (id_product, category_id) VALUES (13, 11);
+INSERT INTO public.product_category (id_product, category_id) VALUES (12, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (14, 13);
+INSERT INTO public.product_category (id_product, category_id) VALUES (15, 11);
+INSERT INTO public.product_category (id_product, category_id) VALUES (16, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (17, 13);
+INSERT INTO public.product_category (id_product, category_id) VALUES (18, 11);
+INSERT INTO public.product_category (id_product, category_id) VALUES (17, 10);
+INSERT INTO public.product_category (id_product, category_id) VALUES (20, 12);
 
 
 --
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.products (id_product, title_product, cost_product, description_product, categoryid_product, imglink_product) VALUES (1, 'product1', 123, 'blahbla2h1', 23, 'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg');
-INSERT INTO public.products (id_product, title_product, cost_product, description_product, categoryid_product, imglink_product) VALUES (2, 'product2', 1223, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg');
-INSERT INTO public.products (id_product, title_product, cost_product, description_product, categoryid_product, imglink_product) VALUES (3, 'product3', 1223, 'blahblah1', 24, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg');
-INSERT INTO public.products (id_product, title_product, cost_product, description_product, categoryid_product, imglink_product) VALUES (4, 'product4', 4123, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg');
-INSERT INTO public.products (id_product, title_product, cost_product, description_product, categoryid_product, imglink_product) VALUES (5, 'product5', 1523, 'blaheblah1', 23, 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (1, 'product1', 123, 'blahbla2h1', 'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (2, 'product2', 1223, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (3, 'product3', 1223, 'blahblah1', 'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (4, 'product4', 4123, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (5, 'pr7oduct5', 1523, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (6, 'produc6t1', 123, 'blahbla2h1', 'https://upload.wikimedia.org/wikipedia/commons/8/8e/An-2_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (7, 'pro5duct2', 1223, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/9/97/MiG-23P_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (8, 'prod4uct3', 1223, 'blahblah1', 'https://upload.wikimedia.org/wikipedia/commons/6/60/Su-24_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (9, 'produ3ct4', 4123, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Military_aircraft_in_Lutsk.jpg/1280px-Military_aircraft_in_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (10, 'prod2uct5', 1523, 'blaheblah1', 'https://upload.wikimedia.org/wikipedia/commons/e/e1/PM-38_Lutsk.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (11, 'p4rod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (12, 'prod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (13, 'prtbvrod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (14, 'prod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (15, 'cvbprod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (16, 'cprod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (17, 'vprod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (18, 'pbrod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (19, 'prod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (20, 'prtbvrod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (21, 'prod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (22, 'cvbprod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (23, 'cprod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (24, 'vprod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (25, 'pbrod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (26, 'prbod2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (27, 'pronmd2uct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
+INSERT INTO public.products (id_product, title_product, cost_product, description_product, imglink_product) VALUES (28, 'prod2muct5', 1523, 'blaheblah1', 'https://image.shutterstock.com/image-vector/chain-icon-trendy-flat-style-600w-2058354959.jpg');
 
 
 --
@@ -368,13 +397,6 @@ SELECT pg_catalog.setval('public.customers_customer_id_seq', 4, true);
 
 
 --
--- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.hibernate_sequence', 1, false);
-
-
---
 -- Name: orders_order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -385,15 +407,15 @@ SELECT pg_catalog.setval('public.orders_order_id_seq', 3, true);
 -- Name: products_id_product_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.products_id_product_seq', 1, false);
+SELECT pg_catalog.setval('public.products_id_product_seq', 28, true);
 
 
 --
--- Name: categories categories_namecategory_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: categories categories_name_category_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.categories
-    ADD CONSTRAINT categories_namecategory_key UNIQUE (namecategory);
+    ADD CONSTRAINT categories_name_category_key UNIQUE (name_category);
 
 
 --
@@ -466,43 +488,11 @@ CREATE UNIQUE INDEX orders_order_id_uindex ON public.orders USING btree (order_i
 
 
 --
--- Name: orders_products fk43vke5jd6eyasd92t3k24kdxq; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: categories categories_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.orders_products
-    ADD CONSTRAINT fk43vke5jd6eyasd92t3k24kdxq FOREIGN KEY (product_id) REFERENCES public.products(id_product);
-
-
---
--- Name: product_category fkdswxvx2nl2032yjv609r29sdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.product_category
-    ADD CONSTRAINT fkdswxvx2nl2032yjv609r29sdr FOREIGN KEY (category_id) REFERENCES public.categories(category_id);
-
-
---
--- Name: orders_products fke4y1sseio787e4o5hrml7omt5; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.orders_products
-    ADD CONSTRAINT fke4y1sseio787e4o5hrml7omt5 FOREIGN KEY (order_id) REFERENCES public.orders(order_id);
-
-
---
--- Name: product_category fkgmq8cej1itivj3b6qtbon6r45; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.product_category
-    ADD CONSTRAINT fkgmq8cej1itivj3b6qtbon6r45 FOREIGN KEY (id_product) REFERENCES public.products(id_product);
-
-
---
--- Name: orders fkra4bew2s7yd898e6skwtmqw1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT fkra4bew2s7yd898e6skwtmqw1 FOREIGN KEY (order_customer_id) REFERENCES public.customers(customer_id);
+ALTER TABLE ONLY public.categories
+    ADD CONSTRAINT categories_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES public.categories(category_id);
 
 
 --

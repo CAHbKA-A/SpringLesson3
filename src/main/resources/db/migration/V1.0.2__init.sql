@@ -107,7 +107,8 @@ create table orders
     order_customer_id integer,
     order_total_cost  integer,
     order_status      varchar(255),
-    order_update      date
+    order_update      date,
+    order_create date
 );
 
 

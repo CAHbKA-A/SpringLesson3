@@ -1,6 +1,7 @@
 package com.example.springlesson3.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,8 +21,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "products")
-public class Product implements Source {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
@@ -48,7 +50,7 @@ public class Product implements Source {
     private String imgLink;
 
 
-    @JsonIgnore
+ //   @JsonIgnore// чтобы не зацикливался при преобразовании в json
     @ManyToMany
     @JoinTable(
             name = "product_category",
@@ -59,7 +61,7 @@ public class Product implements Source {
     private Set<Category> categories = new HashSet<>();
 
 
-    @JsonIgnore
+    @JsonIgnore // чтобы не зацикливался при преобразовании в json
     @ManyToMany
     @JoinTable(
             name = "orders_products",
@@ -69,15 +71,6 @@ public class Product implements Source {
     private Set<Product> orders;
 
 
-    @Override
-    public void setSystemId(String systemId) {
-
-    }
-
-    @Override
-    public String getSystemId() {
-        return null;
-    }
 
 
 }

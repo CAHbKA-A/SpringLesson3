@@ -39,7 +39,7 @@ public class Category {
     @NotBlank(message = "Путь(Alias) обязательный")
     private String pathUrl;
 
-    @JsonIgnore
+ //   @JsonIgnore//можно убрать
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parentCategory;
@@ -48,13 +48,13 @@ public class Category {
 //    //private Set<Product> products = new HashSet<>();
 //    private List<Product> products = new ArrayList<>();
 
-    @JsonIgnore
+    @JsonIgnore// чтобы не зацикливался при преобразовании в json
     @OneToMany(mappedBy = "parentCategory")
     @ToString.Exclude
     private Set<Category> subCategories;
 
 
-    @JsonIgnore
+    @JsonIgnore // чтобы не зацикливался при преобразовании в json
     @ManyToMany
     @JoinTable(
             name = "product_category",
@@ -78,5 +78,6 @@ public class Category {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 
 }

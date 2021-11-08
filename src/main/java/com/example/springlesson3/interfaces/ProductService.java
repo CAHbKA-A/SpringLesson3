@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ProductService {
     Page<Product> getProducts();
+  //  Page<Product> getPageProductById(Long id);
 
 
     void addProductWithImg(Product addProduct, MultipartFile img);

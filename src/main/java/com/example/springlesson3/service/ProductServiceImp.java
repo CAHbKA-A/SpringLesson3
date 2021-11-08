@@ -25,13 +25,6 @@ public class ProductServiceImp implements ProductService {
     private final ProductRepository productRepository;
 
 
-    @Override
-    public Page<Product> getProducts() {
-        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
-        System.out.println(pageable);
-        return productRepository.findAll(pageable);
-
-    }
 
     @Override
     public Page<Product> getProductsByConditional(ProductSearch conditional) {
@@ -58,6 +51,15 @@ public class ProductServiceImp implements ProductService {
         productRepository.save(addProduct);
 
     }
+
+    @Override
+    public Page<Product> getProducts() {
+        Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.DESC, "title"));
+        System.out.println(pageable);
+        return productRepository.findAll(pageable);
+
+    }
+
 
     @Override
     public Product getProductById(Long id) {
