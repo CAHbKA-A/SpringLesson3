@@ -38,7 +38,7 @@ public class Product {
     @Column(name = "cost_product")
     @NotNull(message = "Цена обязательна")
 
-    private Integer cost;
+    private Long cost;
 
     @Column(name = "description_product")
     @NonNull
@@ -69,6 +69,11 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> orders;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product_id")
+    @ToString.Exclude
+    private Set<ProductOverview> productOverview;
 
 
 

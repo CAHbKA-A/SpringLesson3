@@ -19,7 +19,7 @@
 
     <div th:replace="~{Parts/violations::violations}"></div>
 
-    <form action="#" th:action="@{/product}" th:object="${product}" method="post" enctype="multipart/form-data">
+    <form action="#" th:action="@{/templates/old/product}" th:object="${product}" method="post" enctype="multipart/form-data">
 
         <div th:if="${product.id != null}" class="form-group">
             <input type="number" th:field="*{id}" hidden>

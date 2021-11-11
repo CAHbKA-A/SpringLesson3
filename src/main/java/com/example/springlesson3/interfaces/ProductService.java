@@ -2,6 +2,7 @@ package com.example.springlesson3.interfaces;
 
 import com.example.springlesson3.domain.Product;
 import com.example.springlesson3.domain.ProductSearch;
+import com.example.springlesson3.domain.View.dto.ProductDtoDefault;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,11 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ProductService {
-    Page<Product> getProducts();
-  //  Page<Product> getPageProductById(Long id);
+    List<ProductDtoDefault> getProducts();
 
-
-    void addProductWithImg(Product addProduct, MultipartFile img);
+    ProductDtoDefault addProductWithImg(ProductDtoDefault addProduct, MultipartFile img);
 
     Product getProductById(Long id);
 
@@ -26,5 +25,5 @@ public interface ProductService {
     List<Product> findAllByCategories_Alias(String alias);
 
     Object getProductsByConditional(ProductSearch conditional);
-    //List<Product> findAllByCategories(int id);
+
 }

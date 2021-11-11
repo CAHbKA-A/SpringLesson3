@@ -12,23 +12,13 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
-    //JPQL  @Query("select p from Product  p where p.title =:title") или
-    //SQL     @Query (nativeQuery = true,value = "select * from Product p where p.title = :title") или
-
     List<Product> findAllByTitle(String title);
 
-    //смотри список ключевых слов
-    //список пробуктов цена которых >=  min   и  <= max
     List<Product> findAllByCostGreaterThanEqualAndCostLessThanEqual(int minCost, int maxCost);
 
     Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer maxPrice, Integer minPrice, Pageable pageable);
 
 
-    //то же смаое
-//    List<Product> findAllByCostBetweenMinAndMax(int minCost, int maxCost);
-
-
-    //List<Product> findAllByCategories_nameCategory(String name); //_ = join
 
     List<Product> findAllByCategories_PathUrl(String alias);
 }

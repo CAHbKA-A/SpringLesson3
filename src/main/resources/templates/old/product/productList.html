@@ -45,7 +45,7 @@
                     <a href="#" class="btn btn-primary">В корзину</a> </br>
 
                     <!--                  Кнопка будет скрываться если не хватает прав-->
-                    <a th:href="@{/product/form(id=${product.id})}" href="#" class="btn btn-primary">edit</a>
+                    <a th:href="@{/templates/old/product/form(id=${product.id})}" href="#" class="btn btn-primary">edit</a>
                     <a th:href="${'/product/deleteProduct/'+product.id}" class="btn btn-primary">delete</a>
 
 
