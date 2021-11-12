@@ -36,32 +36,5 @@ public class ProductRestController {
         return productService.addProductWithImg(product, image);
     }
 
-//    @GetMapping("/{id}")
-//    public Product getStudentById(@PathVariable Long id) {
-//        //  System.out.println(productService.getProductById(id).getTitle());
-//        return productService.getProductById(id);
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ProductViewDefault getStudentById(@PathVariable Long id) {
-//        //  System.out.println(productService.getProductById(id).getTitle());
-//        return productService.getProductDtoById(id);
-//    }
-//
-//
-//    @PostMapping
-//    public void saveProduct(@RequestBody Product product,
-//                            @RequestPart(required = false) MultipartFile image) {
-//        System.out.println(product);
-//        productService.addProductWithImg(product, image);
-//
-//    }
-//    @RequestMapping(method = {POST, PUT}, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public String saveProduct(@RequestPart Product product,
-//                              @RequestPart(required = false) MultipartFile image) {
-//        System.out.println(product);
-//        productService.addProductWithImg(product, image);
-//        return "ok";
-//    }
 
 }

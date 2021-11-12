@@ -14,16 +14,16 @@ public interface ProductService {
 
     ProductDtoDefault addProductWithImg(ProductDtoDefault addProduct, MultipartFile img);
 
-    Product getProductById(Long id);
-
-    void deleteProduct(Long id);
-
-    Product editProduct(Product product);
-
-    Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable);
-
-    List<Product> findAllByCategories_Alias(String alias);
-
-    Object getProductsByConditional(ProductSearch conditional);
+//    Product getProductById(Long id);
+//
+//    void deleteProduct(Long id);
+//
+//    Product editProduct(Product product);
+//
+//    Page<Product> findAllByCostLessThanEqualAndCostGreaterThanEqual(Integer minCost, Integer maxCost, Pageable pageable);
+//
+//    List<Product> findAllByCategories_Alias(String alias);
+//
+//    Object getProductsByConditional(ProductSearch conditional);
 
 }
