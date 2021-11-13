@@ -57,16 +57,16 @@ public class ProductServiceImp implements ProductService {
         return ProductMapper.MAPPER.fromProduct(product);
     }
 
-//    @Override
-//    @Transactional
-//    public ProductDtoDefault findByIdDto(long id) {
-//        Product entity = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-//        return ProductDtoDefault.builder()
-//                .id(entity.getId())
-//                .cost(entity.getCost())
-//                .title(entity.getTitle())
-//                .build();
-//    }
+    @Override
+    @Transactional
+    public ProductDtoDefault findByIdDto(long id) {
+        Product entity = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return ProductDtoDefault.builder()
+                .id(entity.getId())
+                .cost(entity.getCost())
+                .title(entity.getTitle())
+                .build();
+    }
 
     @Override
     public Page<Product> findAllBySearchCondition(ProductSearch searchCondition) {
