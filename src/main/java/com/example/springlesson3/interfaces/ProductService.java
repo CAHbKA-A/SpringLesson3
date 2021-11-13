@@ -14,7 +14,7 @@ public interface ProductService {
 
     ProductDtoDefault addProductWithImg(ProductDtoDefault addProduct, MultipartFile img);
 
-    ProductDtoDefault findByIdDto(long id);
+ //   ProductDtoDefault findByIdDto(long id);
 
     Page<Product> findAllBySearchCondition(ProductSearch searchCondition);
 
