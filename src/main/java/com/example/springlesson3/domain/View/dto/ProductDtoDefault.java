@@ -15,7 +15,7 @@ public class ProductDtoDefault {
 
     private String description;
 
-    private Double cost;
+    private Long cost;
 
     private String imgLink;
 }

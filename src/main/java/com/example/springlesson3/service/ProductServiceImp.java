@@ -8,8 +8,10 @@ import com.example.springlesson3.interfaces.ProductService;
 import com.example.springlesson3.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -63,5 +65,18 @@ public class ProductServiceImp implements ProductService {
         product = productRepository.save(product);
         return ProductMapper.MAPPER.fromProduct(product);
     }
+    @Override
+    @Transactional
+    public ProductDtoDefault findByIdDto(long id) {
+        Product entity = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return ProductDtoDefault.builder()
+                .id(entity.getId())
+                .cost(entity.getCost())
+                .title(entity.getTitle())
+                .build();
+    }
+
+
+
 
 }

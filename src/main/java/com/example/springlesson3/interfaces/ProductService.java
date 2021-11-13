@@ -14,6 +14,7 @@ public interface ProductService {
 
     ProductDtoDefault addProductWithImg(ProductDtoDefault addProduct, MultipartFile img);
 
+    ProductDtoDefault findByIdDto(long id);
 //    Product getProductById(Long id);
 //
 //    void deleteProduct(Long id);
