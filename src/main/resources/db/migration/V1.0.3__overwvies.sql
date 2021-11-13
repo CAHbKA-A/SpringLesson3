@@ -69,15 +69,11 @@ CREATE TABLE categories
     parent_id    bigint,
         foreign key (parent_id) references categories(category_id)
 );
-INSERT INTO categories (category_id, name_Category, path_Url, parent_id)
-VALUES (1, 'Catregory1', '1', 1),
-       (2, 'Catregory2', '2', 1),
-       (3, 'Catregory3', '3', 2),
-       (4, 'Catregory4', '4', 1),
-       (24, 'Catregory24', '24', 1),
-       (23, 'Catregory23', '23', 1);
-
-
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (10, '234', '324', null);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (11, 'y54ygfdgdf', 'gfdgfdg54', null);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (12, 'y5erwdfg', 'gfdgfdgfd', null);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (13, 'Мясо2', '645п', 10);
+INSERT INTO categories (category_id, name_category, path_url, parent_id) VALUES (14, 'gffbgfng', 'fghtrh46', 10);
 
 DROP TABLE IF EXISTS customers CASCADE;
 create table customers
@@ -111,7 +107,8 @@ create table orders
     order_customer_id integer,
     order_total_cost  integer,
     order_status      varchar(255),
-    order_update      date
+    order_update      date,
+    order_create date
 );
 
 
@@ -156,13 +153,43 @@ create table product_category
 
 
 INSERT INTO product_category (id_product, category_id)
-VALUES (1, 2),
-       (1, 3),
-       (1, 1),
-       (2, 2),
-       (3, 2);
+VALUES (1, 10),
+       (1, 13),
+       (1, 11),
+       (2, 10),
+       (2, 13),
+       (4, 11),
+       (5, 10),
+       (6, 13),
+       (7, 11),
+       (8, 10),
+       (9, 13),
+       (10, 11),
+       (11, 10),
+       (12, 13),
+       (13, 11),
+       (12, 10),
+       (14, 13),
+       (15, 11),
+       (16, 10),
+       (17, 13),
+       (18, 11),
+       (17, 10),
+       (20, 12);
 
+DROP TABLE IF EXISTS overviews CASCADE;
 
+CREATE TABLE overviews (
+                                  overview_id integer NOT NULL,
+                                  product_id integer NOT NULL,
+                                  user_id integer,
+                                  overview_text text,
+                                  rate integer DEFAULT 5 NOT NULL,
+                                  added_date date,
+                                  modify_date date
+);
+
+INSERT INTO public.overviews (overview_id, product_id, user_id, overview_text, rate, added_date, modify_date) VALUES (1, 1, 1, 'good', 5, '2021-11-08', '2021-11-10');
 
 COMMIT;
 

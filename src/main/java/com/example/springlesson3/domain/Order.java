@@ -2,9 +2,12 @@ package com.example.springlesson3.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 @Getter
 @Setter
@@ -32,10 +35,19 @@ public class Order {
     private String orderStatus;
 
 
+    @CreationTimestamp
+    @Column(name = "order_create")
+    @NonNull
+    private LocalDateTime createDate;
+
+
+    @UpdateTimestamp
     @Column(name = "order_update")
     @NonNull
+    private LocalDateTime updateDate;
 
-    Date publicationDate;
+
+
 
     /*1 заказ может содержать несколько продутов*/
     /*один рлдукт может быть в нескольких заказах*/
@@ -62,8 +74,7 @@ public class Order {
                 ", customerId=" + customerId +
                 ", cost=" + cost +
                 ", orderStatus='" + orderStatus + '\'' +
-                ", publicationDate=" + publicationDate +
-
-                '}';
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate;
     }
 }

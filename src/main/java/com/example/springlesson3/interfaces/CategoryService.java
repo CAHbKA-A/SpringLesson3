@@ -16,5 +16,5 @@ public interface CategoryService {
     CategoryTree getCategoryTree();
 
 
-    List<Product> findByPathUrl(String category_uRl);
+    List<Product> findByPathUrl(String categoryUrl);
 }
