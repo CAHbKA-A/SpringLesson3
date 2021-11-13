@@ -1,12 +1,18 @@
 package com.example.springlesson3.service;
 
 import com.example.springlesson3.domain.Product;
+import com.example.springlesson3.domain.ProductSearch;
 import com.example.springlesson3.domain.View.convertor.ProductMapper;
 import com.example.springlesson3.domain.View.dto.ProductDtoDefault;
 import com.example.springlesson3.interfaces.ProductRepository;
 import com.example.springlesson3.interfaces.ProductService;
 import com.example.springlesson3.util.FileUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -76,7 +82,14 @@ public class ProductServiceImp implements ProductService {
                 .build();
     }
 
+    @Override
+    public Page<Product> findAllBySearchCondition(ProductSearch searchCondition){
+        Pageable pageRequest = PageRequest.of(
+                searchCondition.getPageNum(),
+                searchCondition.getPagesSize(),
+                Sort.by(searchCondition.getSortDirection(), searchCondition.getSortField()));
 
-
+        return productRepository.findAll(pageRequest);
+    }
 
 }

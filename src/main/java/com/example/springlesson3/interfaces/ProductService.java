@@ -15,7 +15,10 @@ public interface ProductService {
     ProductDtoDefault addProductWithImg(ProductDtoDefault addProduct, MultipartFile img);
 
     ProductDtoDefault findByIdDto(long id);
-//    Product getProductById(Long id);
+
+    Page<Product> findAllBySearchCondition(ProductSearch searchCondition);
+
+    //    Product getProductById(Long id);
 //
 //    void deleteProduct(Long id);
 //
@@ -25,6 +28,5 @@ public interface ProductService {
 //
 //    List<Product> findAllByCategories_Alias(String alias);
 //
-//    Object getProductsByConditional(ProductSearch conditional);
 
 }
